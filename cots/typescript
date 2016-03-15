@@ -1,0 +1,49 @@
+Script started on Mon 14 Mar 2016 03:32:29 AM PDT
+]0;root@ubuntu: /00-code/CapitalPot/cotsroot@ubuntu:/00-code/CapitalPot/cots# mkdir scripts
+]0;root@ubuntu: /00-code/CapitalPot/cotsroot@ubuntu:/00-code/CapitalPot/cots# cd scripts/
+]0;root@ubuntu: /00-code/CapitalPot/cots/scriptsroot@ubuntu:/00-code/CapitalPot/cots/scripts# mkdir bitcoint_ins[Kt[Kstall
+]0;root@ubuntu: /00-code/CapitalPot/cots/scriptsroot@ubuntu:/00-code/CapitalPot/cots/scripts# cd bitcoint_install/
+]0;root@ubuntu: /00-code/CapitalPot/cots/scripts/bitcoint_installroot@ubuntu:/00-code/CapitalPot/cots/scripts/bitcoint_install# ls
+]0;root@ubuntu: /00-code/CapitalPot/cots/scripts/bitcoint_installroot@ubuntu:/00-code/CapitalPot/cots/scripts/bitcoint_install# cp /i[Kopt/&[K*.sh [K .
+]0;root@ubuntu: /00-code/CapitalPot/cots/scripts/bitcoint_installroot@ubuntu:/00-code/CapitalPot/cots/scripts/bitcoint_install# ls
+[0m[01;32mcompileBT.sh[0m  [01;32mcompileDB.sh[0m  [01;32minstallDepends.sh[0m
+]0;root@ubuntu: /00-code/CapitalPot/cots/scripts/bitcoint_installroot@ubuntu:/00-code/CapitalPot/cots/scripts/bitcoint_install# cd ..
+]0;root@ubuntu: /00-code/CapitalPot/cots/scriptsroot@ubuntu:/00-code/CapitalPot/cots/scripts# cd ..
+]0;root@ubuntu: /00-code/CapitalPot/cotsroot@ubuntu:/00-code/CapitalPot/cots# cd ..
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# cd ..
+]0;root@ubuntu: /00-coderoot@ubuntu:/00-code# ls
+[0m[01;34mCapitalPot[0m
+]0;root@ubuntu: /00-coderoot@ubuntu:/00-code# cd c[KCapitalPot/
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git check[K[K[K[K[Kbr[K[Kcheckou [Kt -m[Kb master
+Switched to a new branch 'master'
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git branch
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git add *
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git commit -a -m ""i"n"[1P"[1P"f"i"r"[1P"[1P"[1P"s"c"r"i"p"t"s" "f"o"r" "b"i"t"c"o"i"n"t" "c"o"m"p"i"l"a"t"i"o"n"[1P"[1P"[1P"[1P"[1P"e" "a"n"d" "i"s"n"t"a"l"l"[1P"[1P"[1P"[1P"[1P"[1P"n"s"t"a"l"l"
+
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'root@ubuntu.(none)')
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# it confi[K[K[K[K[K[K[K[Kgit config --global user.email ""h"a"i"p"e"n"g"."j"i"a"n"g"@"g"m"a"i"l"."c"o"m"
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git config --global user.email "haipeng.jiang@gmail.com"[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Kname ""s"e"a"r"o"c"
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git config --global user.name "searoc"email "haipeng.jiang@gmail.com"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmmit -a -m "scripts for bitcoint compile and install"
+[master (root-commit) af85c86] scripts for bitcoint compile and install
+ 4 files changed, 73 insertions(+)
+ create mode 100755 cots/scripts/bitcoint_install/compileBT.sh
+ create mode 100755 cots/scripts/bitcoint_install/compileDB.sh
+ create mode 100755 cots/scripts/bitcoint_install/installDepends.sh
+ create mode 100644 cots/typescript
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# ls
+[0m[01;34mcots[0m  [01;34msrc[0m
+]0;root@ubuntu: /00-code/CapitalPotroot@ubuntu:/00-code/CapitalPot# git push oi[Krigin master
+Username for 'https://github.com': jia57196
+Password for 'https://jia57196@github.com': 
+Counting objects: 9, done.
+Delta comp
