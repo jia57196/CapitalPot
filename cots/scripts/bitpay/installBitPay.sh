@@ -30,3 +30,5 @@ git clone https://github.com/bitpay/bitcore-lib
 cd bitcore-lib
 npm install
 
+
+sh ./installBitcoin-node.sh
