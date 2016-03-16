@@ -33,3 +33,5 @@ cd $BITCOIN_ROOT
 #if make the bitcoind, set with-cli=no, with-gui=no
 ./configure LDFLAGS="-L${BDB_PREFIX}/lib/" CPPFLAGS="-I${BDB_PREFIX}/include/" --with-cli=no --with-gui=no
 make
+
+make install
