@@ -31,12 +31,17 @@ app.run(function($ionicPlatform) {
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider.state('tab', {
-    url: '/tab',
-    abstract: true,
-    templateUrl: 'templates/tabs.html'
+  $stateProvider.state('intro', {
+    url: '/',
+    templateUrl: 'templates/intro.html',
+    controller: 'IntroCtrl'
   })
-  .state('tab.login', {
+  .state('menu', {
+    url: '/menu',
+    abstract: true,
+    templateUrl: 'templates/sideMenu.html'
+  })  
+  .state('menu.login', {
     url: '/login',
     views: {
       'tab-login': {
@@ -46,7 +51,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('tab.register', {
+  .state('menu.register', {
     url: '/register',
     views: {
       'tab-login': {
@@ -56,7 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('tab.wallet', {
+  .state('menu.wallet', {
     url: '/wallet',
     views: {
       'tab-wallet': {
@@ -65,7 +70,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('tab.chats', {
+  .state('menu.chats', {
       url: '/chats',
       views: {
         'tab-chats': {
@@ -74,7 +79,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
-  .state('tab.chat-detail', {
+  .state('menu.chat-detail', {
       url: '/chats/:chatId',
       views: {
         'tab-chats': {
@@ -83,7 +88,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     })
-  .state('tab.locate', {
+  .state('menu.locate', {
     url: '/locate',
     views: {
       'tab-locate': {
@@ -94,6 +99,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/login');
+  $urlRouterProvider.otherwise('/');
 
 });
