@@ -6,9 +6,14 @@ app.controller('DashCtrl', function($scope) {
 
 app.controller('LoginCtrl', function ($scope) {
  	$scope.data = {};
-    $scope.login = function() {
-        console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-    }
+
+  $scope.login = function() {
+      console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+  }
+
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = false;
+  });     
 });
 
 app.controller('RegisterCtrl', function ($scope) {
@@ -17,11 +22,16 @@ app.controller('RegisterCtrl', function ($scope) {
 	$scope.register = function(){
 		console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);	
 	};
+
+  $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
+    viewData.enableBack = false;
+  }); 
 });
 
 app.controller('ChatsCtrl', function($scope, Chats) {
 
   $scope.chats = Chats.all();
+
   $scope.remove = function(chat) {
     Chats.remove(chat);
   };
@@ -51,27 +61,23 @@ app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
   //$rootScope.hideBar = true;
   $scope.navTitle = "Everyday to Small Notes!";
   $scope.index = 0;
+  $scope.nextName = 'Next';
+  $scope.backName = 'Skip';
 
   $scope.goBack = function (){
+    if ($scope.backName === 'Skip'){
+      startApp();
+      return;
+    }
     $scope.previous();
   };
 
   $scope.goNext = function (){
+    if ($scope.index >= 2){
+      startApp();
+      return;
+    }    
     $scope.next();
-  };
-
-  $scope.showBackButton = function(){
-    if($scope.index > 0){
-      return true;
-    }
-    return false;
-  };
-
-  $scope.showForwardButton = function(){
-    if($scope.index > 1) {
-      return false;
-    }
-    return true;
   };
 
   //*/ Called to navigate to the main app
@@ -84,9 +90,9 @@ app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
 
   //No this is silly
   // Check if the user already did the tutorial and skip it if so
-if(window.localStorage['didTutorial'] === "true") {
-    console.log('Skip intro');
-    startApp();
+  if(window.localStorage['didTutorial'] === "true") {
+    //TODO.... not to check for tempor
+    //startApp();
   }
   else{
     setTimeout(function () {
@@ -103,86 +109,27 @@ if(window.localStorage['didTutorial'] === "true") {
     $scope.$broadcast('slideBox.nextSlide');
   };
 
-  // Our initial right buttons
-  var rightButtons = [
-    {
-      content: 'Next',
-      type: 'button-positive button-clear',
-      tap: function(e) {
-        // Go to the next slide on tap
-        $scope.next();
-      }
-    }
-  ];
-  
-  // Our initial left buttons
-  var leftButtons = [
-    {
-      content: 'Skip',
-      type: 'button-positive button-clear',
-      tap: function(e) {
-        // Start the app on tap
-        startApp();
-      }
-    }
-  ];
-
-  // Bind the left and right buttons to the scope
-  $scope.leftButtons = leftButtons;
-  $scope.rightButtons = rightButtons;
-
-
   // Called each time the slide changes
   $scope.slideChanged = function(index) {
     console.log("slide change, ", index);
     $scope.index = index;
+
+
     // Check if we should update the left buttons
     if(index > 0) {
-      // If this is not the first slide, give it a back button
-      $scope.leftButtons = [
-        {
-          content: 'Back',
-          type: 'button-positive button-clear',
-          tap: function(e) {
-            // Move to the previous slide
-            $scope.$broadcast('slideBox.update');
-          }
-        }
-      ];
+      $scope.backName = "Back";
     } else {
       // This is the first slide, use the default left buttons
-      $scope.leftButtons = leftButtons;
+      $scope.backName = "Skip";
     }
     
     // If this is the last slide, set the right button to
     // move to the app
     if(index === 2) {
-      $scope.rightButtons = [
-        {
-          content: 'Start using MyApp',
-          type: 'button-positive button-clear',
-          tap: function(e) {
-            startApp();
-          }
-        }
-      ];
+      $scope.nextName = 'Start using MyApp';
     } else {
       // Otherwise, use the default buttons
-      $scope.rightButtons = rightButtons;
+      $scope.nextName = 'Next';
     }
   };
-});
-
-app.controller('MainCtrl', function($scope, $state) {
-  console.log('MainCtrl');
-  
-  setTimeout(function () {
-    navigator.splashscreen.hide();
-  }, 750);
-  
-  
-  $scope.toIntro = function(){
-    window.localStorage['didTutorial'] = "false";
-    $state.go('/');
-  }
 });

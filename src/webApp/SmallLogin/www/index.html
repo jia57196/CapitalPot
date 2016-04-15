@@ -4,15 +4,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>SmallNotes Jar</title>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-    <link href="http://code.ionicframework.com/0.9.26/css/ionic.min.css" rel="stylesheet">
+    
+    <!--only the 0.9.26 can work with tutorial?-->
+    <!--link href="http://code.ionicframework.com/0.9.26/css/ionic.min.css" rel="stylesheet"-->
+
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-    <script src="http://code.ionicframework.com/0.9.26/js/ionic.bundle.min.js"></script>
-    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!--script src="http://code.ionicframework.com/0.9.26/js/ionic.bundle.min.js"></script-->
+
     <script src="cordova.js"></script>
 
 
@@ -22,8 +24,8 @@
   </head>
   <body ng-app="smallLogin" animation="slide-left-right-ios7">
 
-    <ion-nav-bar class="nav-title-slide-ios7" type="bar-default" back-button-type="button-icon" back-button-icon="icon ion-arrow-left-c">
-    </ion-nav-bar>
+    <ion-nav-bar class="bar-dark" type="bar-default" back-button-type="button-icon" back-button-icon="icon ion-arrow-left-c">
+    </ion-nav-bar>  
 
     <!-- ALL VIEW STATES LOADED IN HERE -->
     <ion-nav-view></ion-nav-view>

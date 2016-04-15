@@ -1,15 +1,16 @@
-<ion-pane>
 
-<ion-view title="{{navTitle}}" left-buttons="leftButtons" right-buttons="rightButtons" hide-back-button="true" >
- <ion-nav-buttons side="left">
-    <button class="button back-button buttons button-clear header-item" ng-click="goBack()" ng-show="showBackButton()">
-      <i class="icon ion-ios-arrow-back"> Back</i> 
+
+
+<ion-view hide-back-button="true" left-buttons="leftButtons" right-buttons="rightButtons">
+  <ion-nav-buttons side="left">
+    <button class="button back-button buttons button-clear header-item" menu-toggle="primary" ng-click="goBack()" > 
+      <i class="icon ion-ios-arrow-back"> {{backName}}</i> 
     </button>
   </ion-nav-buttons>
 
- <ion-nav-buttons side="right">
-    <button class="button back-button buttons button-clear header-item" ng-click="goNext()" ng-show="showForwardButton()">
-      <i class="icon ion-ios-arrow-forward"> Next</i> 
+  <ion-nav-buttons side="right" >
+    <button class="button back-button buttons button-clear header-item" menu-toggle="primary" ng-click="goNext()">
+      <i class="icon ion-ios-arrow-forward"> {{nextName}}</i> 
     </button>
   </ion-nav-buttons>
 
@@ -46,4 +47,3 @@
     </ion-slide>
   </ion-slide-box>
 </ion-view>
-</ion-pane>
