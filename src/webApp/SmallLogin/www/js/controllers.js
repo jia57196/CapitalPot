@@ -47,11 +47,33 @@ app.controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
 });
 
 
-app.controller('IntroCtrl', function($scope, $state) {
+app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
   //$rootScope.hideBar = true;
   $scope.navTitle = "Everyday to Small Notes!";
+  $scope.index = 0;
 
-  console.log("Page name now is: ", $scope.navTitle);
+  $scope.goBack = function (){
+    $scope.previous();
+  };
+
+  $scope.goNext = function (){
+    $scope.next();
+  };
+
+  $scope.showBackButton = function(){
+    if($scope.index > 0){
+      return true;
+    }
+    return false;
+  };
+
+  $scope.showForwardButton = function(){
+    if($scope.index > 1) {
+      return false;
+    }
+    return true;
+  };
+
   //*/ Called to navigate to the main app
   var startApp = function() {
     $state.go('menu.login');
@@ -67,11 +89,14 @@ if(window.localStorage['didTutorial'] === "true") {
     startApp();
   }
   else{
-  setTimeout(function () {
-    navigator.splashscreen.hide();
-  }, 750);
+    setTimeout(function () {
+      navigator.splashscreen.hide();
+    }, 750);
   }
   
+  $scope.previous = function() {
+    $ionicSlideBoxDelegate.previous();
+  };
 
   // Move to the next slide
   $scope.next = function() {
@@ -110,6 +135,7 @@ if(window.localStorage['didTutorial'] === "true") {
   // Called each time the slide changes
   $scope.slideChanged = function(index) {
     console.log("slide change, ", index);
+    $scope.index = index;
     // Check if we should update the left buttons
     if(index > 0) {
       // If this is not the first slide, give it a back button
@@ -130,7 +156,7 @@ if(window.localStorage['didTutorial'] === "true") {
     
     // If this is the last slide, set the right button to
     // move to the app
-    if(index == 2) {
+    if(index === 2) {
       $scope.rightButtons = [
         {
           content: 'Start using MyApp',
