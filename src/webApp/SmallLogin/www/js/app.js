@@ -37,23 +37,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })  
   .state('menu.login', {
     url: '/login',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/tab-login.html',
-        controller: 'LoginCtrl',
-        controllerAs: 'vm'
-      }
-    }
+    templateUrl: 'templates/tab-login.html'
   })
   .state('menu.register', {
     url: '/register',
-    views: {
-      'tab-login': {
-        templateUrl: 'templates/register.html',
-        controller: 'RegisterCtrl',
-        controllerAs: 'vm'
-      }
-    }
+    templateUrl: 'templates/register.html'
   })
   .state('menu.wallet', {
     url: '/wallet',
@@ -88,6 +76,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
       'tab-locate': {
         templateUrl: 'templates/tab-locate.html',
         controller: 'LocateCtrl'
+      }
+    }
+  })
+  .state('menu.rates', {
+    url: '/rates',
+    views: {
+      'tab-rates': {
+        templateUrl: 'templates/tab-rates.html',
+        controller: 'RatesCtrl'
       }
     }
   });

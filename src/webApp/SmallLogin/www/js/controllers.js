@@ -4,11 +4,16 @@ app.controller('DashCtrl', function($scope) {
 
 });
 
-app.controller('LoginCtrl', function ($scope) {
+app.controller('RatesCtrl', function($scope) {
+
+});
+
+app.controller('LoginCtrl', function ($scope, $state) {
  	$scope.data = {};
 
   $scope.login = function() {
-      console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+    console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
+    $state.go('menu.wallet');
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -47,13 +52,28 @@ app.controller('LocateCtrl', function($scope) {
   };
 });
 
-app.controller('NavCtrl', function($scope, $ionicSideMenuDelegate) {
+app.controller('NavCtrl', function($scope, $ionicPopover, $ionicSideMenuDelegate) {
   $scope.showMenu = function () {
     $ionicSideMenuDelegate.toggleLeft();
   };
   $scope.showRightMenu = function () {
     $ionicSideMenuDelegate.toggleRight();
   };
+
+  $ionicPopover.fromTemplateUrl('help-about.html', {
+    scope: $scope,
+  }).then(function (popover) {
+    $scope.popover = popover;
+  });
+
+  $scope.openHelp = function($event) {
+    $scope.popover.show($event);
+  };
+  $scope.$on('$destroy', function() {
+    $scope.popover.remove();
+  });
+
+
 });
 
 
