@@ -8,7 +8,7 @@ app.controller('RatesCtrl', function($scope) {
 
 });
 
-app.controller('LoginCtrl', function ($scope, $state) {
+app.controller('LoginCtrl', function ($scope, $state, $stateParams) {
  	$scope.data = {};
 
   $scope.login = function() {
@@ -21,11 +21,12 @@ app.controller('LoginCtrl', function ($scope, $state) {
   });     
 });
 
-app.controller('RegisterCtrl', function ($scope) {
+app.controller('RegisterCtrl', function ($scope, $state) {
 	$scope.data = {};
 	
 	$scope.register = function(){
 		console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);	
+    $state.go('menu.wallet');
 	};
 
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -60,7 +61,7 @@ app.controller('NavCtrl', function($scope, $ionicPopover, $ionicSideMenuDelegate
     $ionicSideMenuDelegate.toggleRight();
   };
 
-  $ionicPopover.fromTemplateUrl('help-about.html', {
+  $ionicPopover.fromTemplateUrl('templates/help-about.html', {
     scope: $scope,
   }).then(function (popover) {
     $scope.popover = popover;
@@ -102,7 +103,7 @@ app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
 
   //*/ Called to navigate to the main app
   var startApp = function() {
-    $state.go('menu.login');
+    $state.go('settings.login');
 
     // Set a flag that we finished the tutorial
     window.localStorage['didTutorial'] = true;
@@ -131,7 +132,6 @@ app.controller('IntroCtrl', function($scope, $state, $ionicSlideBoxDelegate) {
 
   // Called each time the slide changes
   $scope.slideChanged = function(index) {
-    console.log("slide change, ", index);
     $scope.index = index;
 
 

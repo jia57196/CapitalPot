@@ -30,27 +30,37 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/intro.html',
     controller: 'IntroCtrl'
   })
+  .state('settings', {
+    url: '/settings',
+    abstract: true,
+    cache: false,
+    templateUrl: 'templates/setting-menu.html'
+  })    
   .state('menu', {
     url: '/menu',
     abstract: true,
+    cache: false,
     templateUrl: 'templates/sideMenu.html'
   })  
-  .state('menu.login', {
+  .state('settings.login', {
     url: '/login',
-    templateUrl: 'templates/tab-login.html'
+    cache: false,
+    templateUrl: 'templates/login.html'
   })
-  .state('menu.register', {
+  .state('settings.register', {
     url: '/register',
     templateUrl: 'templates/register.html'
   })
   .state('menu.wallet', {
     url: '/wallet',
+    cache: false,
     views: {
       'tab-wallet': {
         templateUrl: 'templates/tab-wallet.html',
         controller: 'DashCtrl'
       }
-    }
+    },
+    templateUrl: 'templates/wallet-home.html'
   })
   .state('menu.chats', {
       url: '/chats',
