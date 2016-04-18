@@ -18,3 +18,50 @@
 .item .price.negative {
   background: #ef4e3a;
 }
+
+.tabs .tab-item .icon.btcrates {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('../img/bitcoin-1.jpg');
+  background-size:contain;
+}
+.tabs .tab-item .icon.btcrates:hover{
+    background-color:#098aba !important;   
+}
+
+
+.tabs .tab-item .icon.maplocation {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('../img/location.png');
+  background-size:contain;
+
+}
+.tabs .tab-item .icon.maplocation:hover{
+  background-color:#098aba !important;
+}
+
+.tabs .tab-item .icon.wallet {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('../img/wallet.png');
+  background-size:contain;
+}
+.tabs .tab-item .icon.wallet:hover{
+    background-color:#098aba !important;   
+}
+
+.tabs .tab-item .icon.chat {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('../img/chat.png');
+  background-size:contain;
+}
+.tabs .tab-item .icon.chat:hover{
+    background-color:#098aba !important;   
+}
+

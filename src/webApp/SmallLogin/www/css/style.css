@@ -41,3 +41,14 @@ body {
     background-color: rgba(0,0,0,0) !important;
   }
 }
+
+.logo-icon{
+  width: 170px;
+  margin: 30px auto;
+}
+
+.logotext{
+  font-family: Courier;
+  color: red;
+  font-size:20px;
+}

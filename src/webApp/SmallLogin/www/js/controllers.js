@@ -1,6 +1,31 @@
 var app = angular.module('smallLogin.controllers', []);
 
-app.controller('DashCtrl', function($scope) {
+app.controller('HomeCtrl', function($scope) {
+
+});
+
+app.controller('HistoryCtrl', function($scope) {
+
+});
+
+app.controller('ProposalCtrl', function($scope) {
+
+});
+
+app.controller('SendCtrl', function($scope) {
+
+});
+
+app.controller('ReceiveCtrl', function($scope) {
+
+});
+
+
+app.controller('TabsCtrl', function($scope) {
+
+});
+
+app.controller('WalletCtrl', function($scope) {
 
 });
 
@@ -13,7 +38,7 @@ app.controller('LoginCtrl', function ($scope, $state, $stateParams) {
 
   $scope.login = function() {
     console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);
-    $state.go('menu.wallet');
+    $state.go('menu.tab.wallet');
   }
 
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {
@@ -26,7 +51,7 @@ app.controller('RegisterCtrl', function ($scope, $state) {
 	
 	$scope.register = function(){
 		console.log("LOGIN user: " + $scope.data.username + " - PW: " + $scope.data.password);	
-    $state.go('menu.wallet');
+    $state.go('menu.tab.wallet');
 	};
 
   $scope.$on('$ionicView.beforeEnter', function (event, viewData) {

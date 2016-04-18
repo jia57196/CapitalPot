@@ -15,28 +15,7 @@
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
-    
-
-    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
-
-      <ion-tab title="Wallet" icon-off="ion-ios-briefcase" icon-on="ion-ios-briefcase-outline" href="#/menu/wallet">
-        <ion-nav-view name="tab-wallet"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="Chats" icon-off="ion-ios-chatboxes-outline" icon-on="ion-ios-chatboxes" href="#/menu/chats">
-        <ion-nav-view name="tab-chats"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="locate" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/menu/locate">
-        <ion-nav-view name="tab-locate"></ion-nav-view>
-      </ion-tab>
-
-      <ion-tab title="rates" icon-off="ion-ios-person" icon-on="ion-ios-person-outline" href="#/menu/rates">
-        <ion-nav-view name="tab-rates"></ion-nav-view>
-      </ion-tab>
-
-    </ion-tabs>
-  <ion-nav-view animation="slide-left-right"></ion-nav-view>
+    <ion-nav-view animation="slide-left-right" name="menu-content"></ion-nav-view>
   </ion-side-menu-content> 
   
   <ion-side-menu side="left">
@@ -68,10 +47,10 @@
     <ion-content>
       <ul class="list">
         <li>
-          <a class="item" menu-close nav-clear href="#/preference">Preference</a>
+          <a class="item" menu-close nav-clear href="#/settings/preference">Preference</a>
         </li>
         <li>
-          <a class="item" menu-close nav-clear href="#/Rates">BTC Rates</a>
+          <a class="item" menu-close nav-clear href="#/settings/customize">Options</a>
         </li>
       </ul>
     </ion-content>
