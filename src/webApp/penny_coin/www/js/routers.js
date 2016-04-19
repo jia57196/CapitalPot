@@ -19,6 +19,30 @@ app.run(function($ionicPlatform) {
   });
 })
 
+.factory('Currencies', function () {
+  return [
+    { code: 'AUD', text: 'Australian Dollar', selected: true },
+    { code: 'BRL', text: 'Brazilian Real', selected: false },
+    { code: 'CAD', text: 'Canadian Dollar', selected: true },
+    // { code: 'CHF', text: 'Swiss Franc', selected: false }, Disabled CHF because the API no longer returns it
+    { code: 'CNY', text: 'Chinese Yuan', selected: true},
+    { code: 'EUR', text: 'Euro', selected: true },
+    { code: 'GBP', text: 'British Pound Sterling', selected: true },
+    { code: 'IDR', text: 'Indonesian Rupiah', selected: false },
+    { code: 'ILS', text: 'Israeli New Sheqel', selected: false },
+    { code: 'MXN', text: 'Mexican Peso', selected: true },
+    { code: 'NOK', text: 'Norwegian Krone', selected: false },
+    { code: 'NZD', text: 'New Zealand Dollar', selected: false },
+    { code: 'PLN', text: 'Polish Zloty', selected: false },
+    { code: 'RON', text: 'Romanian Leu', selected: false },
+    { code: 'RUB', text: 'Russian Ruble', selected: true },
+    { code: 'SEK', text: 'Swedish Krona', selected: false },
+    { code: 'SGD', text: 'Singapore Dollar', selected: false },
+    { code: 'USD', text: 'United States Dollar', selected: true },
+    { code: 'ZAR', text: 'South African Rand', selected: false }
+  ];
+});
+
 app.config(function($stateProvider, $urlRouterProvider) {
 
     $stateProvider
@@ -51,8 +75,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/rates/:rates',
         views: {
             'menu-content': {
-                templateUrl: 'views/tab-feed.html',
-                controller: 'JournalCtrl'
+                templateUrl: 'views/rates/tab-rates.html',
+                controller: 'RatesCtrl'
             },
             'menu-left': {
                 templateUrl: 'views/menu-anon.html'
@@ -63,32 +87,49 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.rates-post', {
-        url: '/rates/:rates/:postId',
-        views: {
-            'menu-content': {
-                templateUrl: 'views/view-post.html',
-                controller: 'PostCtrl'
-            }
-        }
-    })
-
     .state('app.tab.rates', {
         url: '/rates/:rates',
         views: {
             'tab-rates': {
-                templateUrl: 'views/tab-feed.html',
-                controller: 'JournalCtrl'
+                templateUrl: 'views/rates/tab-rates.html',
+                controller: 'RatesCtrl'
             }
         }
     })
 
-    .state('app.tab.rates-post', {
-        url: '/rates/:rates/:postId',
+    .state('app.tab.rates.view', {
+        url: '/view',
         views: {
-            'tab-rates': {
-                templateUrl: 'views/view-post.html',
-                controller: 'PostCtrl'
+            'tab-rates-view': {
+                templateUrl: 'views/rates/tab-rates-view.html',
+                controller: 'RatesCtrl'
+            }
+        }
+    })
+    .state('app.tab.rates.history', {
+        url: '/history',
+        views: {
+            'tab-rates-history': {
+                templateUrl: 'views/rates/tab-rates-history.html',
+                controller: 'HistoryController'
+            }
+        }
+    })
+    .state('app.tab.rates.detail', {
+      url: '/detail/:currency',
+      views: {
+        'rates-tab': {
+          templateUrl: 'views/rates/detail.html',
+          controller: 'DetailController'
+        }
+      }
+    })    
+    .state('app.tab.rates.currencies', {
+        url: '/currencies',
+        views: {
+            'tab-rates-currencies': {
+                templateUrl: 'views/rates/tab-rates-currencies.html',
+                controller: 'CurrenciesController'
             }
         }
     })

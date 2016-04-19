@@ -1,8 +1,7 @@
     <ion-view>
         <ion-content ng-class="auth.logged_in ? 'menu-list-auth' : 'menu-list-anon'">
             <ion-list>
-                <ion-item nav-clear class="item-icon-left" collection-repeat="group in groups" href="#/app/tab/rates/{{group.user.username}}" ng-click="conf.current = group.user.username" ng-class="{active: group.user.username == conf.current}">
-                    <img class="icon menu-icon-avatar" ng-src="{{group.user.picture.thumbnail}}">{{group.user.username}}</ion-item>
+
             </ion-list>
         </ion-content>
     </ion-view>
