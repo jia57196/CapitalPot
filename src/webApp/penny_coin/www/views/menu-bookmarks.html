@@ -1,8 +1,12 @@
     <ion-view>
         <ion-content ng-class="auth.logged_in ? 'menu-list-auth' : 'menu-list-anon'">
-            <ion-list>
-                <ion-item nav-clear class="item-icon-left" collection-repeat="bookmark in bookmarks" href="#/app{{auth.logged_in ? '/tab' : ''}}/journal/{{bookmark.user.username}}" ng-click="conf.current = bookmark.user.username" ng-class="{active: bookmark.user.username == conf.current}">
-                    <img class="icon menu-icon-avatar" ng-src="{{bookmark.user.picture.thumbnail}}">{{bookmark.user.username}}</ion-item>
-            </ion-list>
+          <ul class="list">
+            <li>
+              <a class="item" menu-close nav-clear href="#/">Tips on Everyday</a>
+            </li>
+            <li>
+              <a class="item" menu-close ng-click="openHelp($event)">About</a>
+            </li>
+          </ul>
         </ion-content>
     </ion-view>

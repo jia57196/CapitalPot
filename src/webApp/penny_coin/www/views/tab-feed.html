@@ -5,7 +5,7 @@
         <ion-content>
             <ion-refresher on-refresh="doRefresh()"></ion-refresher>
             <ion-list>
-                <ion-item class="item-avatar item-icon-right" collection-repeat="post in posts" type="item-text-wrap" href="#/app{{auth.logged_in ? '/tab' : ''}}/{{mode}}/{{journal}}/{{post.user.username}}">
+                <ion-item class="item-avatar item-icon-right" collection-repeat="post in posts" type="item-text-wrap" href="#/app{{auth.logged_in ? '/tab' : ''}}/{{mode}}/{{rates}}/{{post.user.username}}">
                     <img ng-src="{{post.user.picture.thumbnail}}">
                     <h2>{{post.user.username}}</h2>
                     <p>{{post.user.sha256}}</p>

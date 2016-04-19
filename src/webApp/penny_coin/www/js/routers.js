@@ -1,4 +1,5 @@
-var app = angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 'ionicApp.services']);
+var app = angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 
+    'ionicApp.services', 'ionicApp.controllers.menu', 'ionicApp.controllers.wallet']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -39,12 +40,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             'menu-left': {
                 templateUrl: 'views/menu-auth.html',
                 controller: 'MenuCtrl'
-            }
+            },
+            'menu-right': {
+                templateUrl: 'views/menu-setting.html'
+            }    
         }
     })
 
-    .state('app.journal', {
-        url: '/journal/:journal',
+    .state('app.rates', {
+        url: '/rates/:rates',
         views: {
             'menu-content': {
                 templateUrl: 'views/tab-feed.html',
@@ -52,12 +56,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             },
             'menu-left': {
                 templateUrl: 'views/menu-anon.html'
-            }
+            },
+            'menu-right': {
+                templateUrl: 'views/menu-setting.html'
+            }            
         }
     })
 
-    .state('app.journal-post', {
-        url: '/journal/:journal/:postId',
+    .state('app.rates-post', {
+        url: '/rates/:rates/:postId',
         views: {
             'menu-content': {
                 templateUrl: 'views/view-post.html',
@@ -66,71 +73,71 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.journal', {
-        url: '/journal/:journal',
+    .state('app.tab.rates', {
+        url: '/rates/:rates',
         views: {
-            'tab-journal': {
+            'tab-rates': {
                 templateUrl: 'views/tab-feed.html',
                 controller: 'JournalCtrl'
             }
         }
     })
 
-    .state('app.tab.journal-post', {
-        url: '/journal/:journal/:postId',
+    .state('app.tab.rates-post', {
+        url: '/rates/:rates/:postId',
         views: {
-            'tab-journal': {
+            'tab-rates': {
                 templateUrl: 'views/view-post.html',
                 controller: 'PostCtrl'
             }
         }
     })
 
-    .state('app.tab.friends', {
-        url: '/friends/posts',
+    .state('app.tab.chat', {
+        url: '/chat/posts',
         views: {
-            'tab-friends': {
+            'tab-chat': {
                 templateUrl: 'views/tab-feed.html',
                 controller: 'FriendsCtrl'
             }
         }
     })
 
-    .state('app.tab.friends-post', {
-        url: '/friends/posts/:postId',
+    .state('app.tab.chat-post', {
+        url: '/chat/posts/:postId',
         views: {
-            'tab-friends': {
+            'tab-chat': {
                 templateUrl: 'views/view-post.html',
                 controller: 'PostCtrl'
             }
         }
     })
 
-    .state('app.tab.favourites', {
-        url: '/favourites',
+    .state('app.tab.trader', {
+        url: '/trader',
         views: {
-            'tab-favourites': {
-                templateUrl: 'views/tab-favourites.html',
-                controller: 'FavouritesCtrl'
+            'tab-trader': {
+                templateUrl: 'views/tab-trader.html',
+                controller: 'traderCtrl'
             }
         }
     })
 
-    .state('app.tab.messages', {
-        url: '/messages',
+    .state('app.tab.wallet', {
+        url: '/wallet',
         views: {
-            'tab-messages': {
-                templateUrl: 'views/message/tab-messages.html',
+            'tab-wallet': {
+                templateUrl: 'views/wallet/tab-wallet.html',
                 controller: 'MessagesCtrl'
             }
         }
     })
 
-    .state('app.tab.messages.all', {
+    .state('app.tab.wallet.all', {
         url: '/all',
         views: {
-            'tab-messages-all': {
-                templateUrl: 'views/message/tab-message-list.html',
+            'tab-wallet-all': {
+                templateUrl: 'views/wallet/tab-wallet-list.html',
                 controller: 'MessageListCtrl'
             }
         },
@@ -141,11 +148,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.messages.all-view', {
+    .state('app.tab.wallet.all-view', {
         url: '/all/:id',
         views: {
-            'tab-messages-all': {
-                templateUrl: 'views/message/view-message.html',
+            'tab-wallet-all': {
+                templateUrl: 'views/wallet/view-wallet.html',
                 controller: 'MessageViewCtrl'
             }
         },
@@ -156,11 +163,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.messages.sent', {
+    .state('app.tab.wallet.sent', {
         url: '/sent',
         views: {
-            'tab-messages-sent': {
-                templateUrl: 'views/message/tab-message-list.html',
+            'tab-wallet-sent': {
+                templateUrl: 'views/wallet/tab-wallet-list.html',
                 controller: 'MessageListCtrl'
             }
         },
@@ -171,11 +178,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.messages.sent-view', {
+    .state('app.tab.wallet.sent-view', {
         url: '/sent/:id',
         views: {
-            'tab-messages-sent': {
-                templateUrl: 'views/message/view-message.html',
+            'tab-wallet-sent': {
+                templateUrl: 'views/wallet/view-wallet.html',
                 controller: 'MessageViewCtrl'
             }
         },
@@ -186,42 +193,42 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.messages.flagged', {
-        url: '/flagged',
+    .state('app.tab.wallet.receive', {
+        url: '/receive',
         views: {
-            'tab-messages-flagged': {
-                templateUrl: 'views/message/tab-message-list.html',
+            'tab-wallet-receive': {
+                templateUrl: 'views/wallet/tab-wallet-list.html',
                 controller: 'MessageListCtrl'
             }
         },
         resolve: {
             mode: function() {
-                return 'flagged';
+                return 'receive';
             }
         }
     })
 
-    .state('app.tab.messages.flagged-view', {
-        url: '/flagged/:id',
+    .state('app.tab.wallet.receive-view', {
+        url: '/receive/:id',
         views: {
-            'tab-messages-flagged': {
-                templateUrl: 'views/message/view-message.html',
+            'tab-wallet-receive': {
+                templateUrl: 'views/wallet/view-wallet.html',
                 controller: 'MessageViewCtrl'
             }
         },
         resolve: {
             mode: function() {
-                return 'flagged';
+                return 'receive';
             }
         }
     });
 
     $urlRouterProvider.otherwise(function($injector, $location) {
-        var path = '/app/journal/';
+        var path = '/app/rates/';
         var cs = $injector.get('ConfSrvc');
         var as = $injector.get('AuthSrvc');
         if (as.logged_in) {
-            path = '/app/tab/journal/';
+            path = '/app/tab/rates/';
         }
         $location.path(path + cs.current);
     });

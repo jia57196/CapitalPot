@@ -23,45 +23,6 @@ angular.module('ionicApp.services', [])
     this.logged_in = true;
 })
 
-.directive('navClear', [
-    '$ionicViewService',
-    '$state',
-    '$location',
-    '$window',
-    '$rootScope',
-    function($ionicHistory, $location, $state, $window, $rootScope) {
-        $rootScope.$on('$stateChangeError', function() {
-            $ionicHistory.nextViewOptions(null);
-        });
-        return {
-            priority: 100,
-            restrict: 'AC',
-            compile: function($element) {
-                return {
-                    pre: prelink
-                };
-
-                function prelink($scope, $element, $attrs) {
-                    var unregisterListener;
-
-                    function listenForStateChange() {
-                        unregisterListener = $scope.$on('$stateChangeStart', function() {
-                            $ionicHistory.nextViewOptions({
-                                disableAnimate: true,
-                                disableBack: true
-                            });
-                            unregisterListener();
-                        });
-                        $window.setTimeout(unregisterListener, 300);
-                    }
-
-                    $element.on('click', listenForStateChange);
-                }
-            }
-        };
-    }
-])
-
 .directive('actualSrc', function() {
     return {
         link: function postLink(scope, element, attrs) {

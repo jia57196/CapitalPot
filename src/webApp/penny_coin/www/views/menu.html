@@ -1,14 +1,24 @@
-    <ion-side-menus>
-        <ion-side-menu-content>
-            <ion-nav-bar class="bar-positive">
-                <ion-nav-buttons side="left">
-                    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-                </ion-nav-buttons>
-                <ion-nav-back-button></ion-nav-back-button>
-            </ion-nav-bar>
-            <ion-nav-view name="menu-content"></ion-nav-view>
-        </ion-side-menu-content>
-        <ion-side-menu side="left" expose-aside-when="large">
-            <ion-nav-view name="menu-left"></ion-nav-view>
-        </ion-side-menu>
-    </ion-side-menus>
+<ion-side-menus>
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-buttons side="left">
+                <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="right">
+                <button menu-toggle="right" class="button button-icon icon ion-gear-a"></button>
+            </ion-nav-buttons>
+
+            <ion-nav-back-button></ion-nav-back-button>
+        </ion-nav-bar>
+        <ion-nav-view name="menu-content"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left" expose-aside-when="large">
+        <ion-nav-view name="menu-left"></ion-nav-view>
+    </ion-side-menu>
+
+    <ion-side-menu side="right" expose-aside-when="large">
+        <ion-nav-view name="menu-right"></ion-nav-view>
+    </ion-side-menu>        
+</ion-side-menus>

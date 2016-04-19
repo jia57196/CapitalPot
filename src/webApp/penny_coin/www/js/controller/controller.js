@@ -19,16 +19,10 @@ angular.module('ionicApp.controllers', [])
     $scope.conf = ConfSrvc;
 })
 
-.controller('MenuCtrl', function($scope) {
-    $scope.main = {
-        show_list: 'bookmarks'
-    };
-})
-
 .controller('JournalCtrl', function($scope, $stateParams, UserSrvc) {
-    $scope.journal = $stateParams.journal;
-    $scope.title = 'Journal - ' + $scope.journal;
-    $scope.mode = 'journal';
+    $scope.rates = $stateParams.rates;
+    $scope.title = 'Rates - ' + $scope.rates;
+    $scope.mode = 'rates';
     $scope.posts = [];
     UserSrvc.GetUsers(20).then(function(items) {
         $scope.posts = items;
@@ -48,7 +42,7 @@ angular.module('ionicApp.controllers', [])
 })
 
 .controller('FriendsCtrl', function($scope, UserSrvc) {
-    $scope.journal = 'posts';
+    $scope.rates = 'posts';
     $scope.title = 'Friends';
     $scope.mode = 'friends';
     $scope.posts = [];
@@ -65,63 +59,6 @@ angular.module('ionicApp.controllers', [])
     //$scope.post = JournalSrvc.get($stateParams.postId);
 })
 
-.controller('FavouritesCtrl', function($scope) {
+.controller('traderCtrl', function($scope) {
 
-})
-
-.controller('MessagesCtrl', function($scope) {
-
-})
-
-.controller('MessageListCtrl', function(mode, $rootScope, $rootScope, $scope, EmailService) {
-
-    $scope.emails = [];
-
-    $scope.data = {
-        showDelete: false,
-        mode: mode,
-        title: ''
-    };
-
-    $scope.setListData = function() {
-        switch (mode) {
-            case 'all':
-                $scope.data.title = 'All';
-                $scope.emails = EmailService.getInboxEmails();
-                break;
-            case 'flagged':
-                $scope.data.title = 'Flagged';
-                $scope.emails = EmailService.getInboxEmails();
-                break;
-            case 'sent':
-                $scope.data.title = 'Sent';
-                $scope.emails = EmailService.getOutboxEmails();
-                break;
-            default:
-                $scope.data.title = 'E-Mails';
-        }
-    };
-
-    $scope.setListData();
-
-    $scope.onEmailFlag = function(email, e) {
-        email.flagged = !email.flagged;
-        e.preventDefault();
-        $rootScope.emailCounts.flaggedCount = EmailService.getFlaggedEmailCount();
-    };
-
-    $scope.onEmailDelete = function(email) {
-        $scope.emails.splice($scope.emails.indexOf(email), 1);
-    };
-})
-
-.controller('MessageViewCtrl', function(mode, $stateParams, $scope, $timeout, EmailService) {
-    if (mode == 'sent') {
-        $scope.email = EmailService.getOutboxEmail($stateParams.id);
-    } else {
-        $scope.email = EmailService.getInboxEmail($stateParams.id);
-    }
-    $timeout(function() {
-        $scope.email.was_read = true;
-    }, 500);
 });
