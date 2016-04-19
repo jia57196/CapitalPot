@@ -26,7 +26,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })  
   .state('settings.options', {
     url: '/options',
-    cache: false,
     templateUrl: 'templates/options.html'
   })    
   .state('settings.register', {
@@ -51,7 +50,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/wallet',
     views: {
       'tab-wallet': {
-        templateUrl: 'templates/wallet/tabs.html',
+        templateUrl: 'templates/wallet/tab-wallet.html',
         controller: 'TabsCtrl'
       }
     }

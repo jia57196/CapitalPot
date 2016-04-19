@@ -1,0 +1,73 @@
+.menu-icon-avatar {
+    border-radius: 100% !important;
+    width: 36px !important;
+    height: 36px !important;
+    left: 8px !important;
+    top: 8px !important;
+}
+
+.menu-header {
+    padding: 0 !important;
+    border: 0 !important;
+}
+
+.menu-header-anon {
+    height: 52px !important;
+}
+
+.menu-header-auth {
+    height: 106px !important;
+}
+
+.menu-list-anon {
+    top: 97px !important;
+    /* menu-header-anon.height + 44 + 1 */
+}
+
+.menu-list-auth {
+    top: 149px !important;
+    /* menu-header-auth.height + 44 + 1 */
+}
+
+.menu-tabs {
+    height: 54px !important;
+    width: auto !important;
+}
+
+.tabs-messages .tab-item.tab-item-active,
+.tabs-messages .tab-item.active,
+.tabs-messages .tab-item.activated {
+    color: #444444 !important;
+}
+
+.aside-open [menu-toggle] {
+    display: none;
+}
+/* Messages */
+
+.email-flag-button {
+    margin-top: 12px !important;
+    padding: 0 !important;
+}
+
+.email-delete-button {
+    padding-left: 4px !important;
+}
+
+.email-item {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.email-text {
+    font-size: smaller !important;
+    color: grey !important;
+}
+
+.email-body-text {
+    font-size: smaller !important;
+}
+
+.email-item-text {
+    margin-left: 26px;
+}

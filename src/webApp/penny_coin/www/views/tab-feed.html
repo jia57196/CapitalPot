@@ -1,0 +1,17 @@
+    <ion-view view-title="{{title}}" hide-back-button="true">
+        <ion-nav-buttons side="left">
+            <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+        <ion-content>
+            <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <ion-list>
+                <ion-item class="item-avatar item-icon-right" collection-repeat="post in posts" type="item-text-wrap" href="#/app{{auth.logged_in ? '/tab' : ''}}/{{mode}}/{{journal}}/{{post.user.username}}">
+                    <img ng-src="{{post.user.picture.thumbnail}}">
+                    <h2>{{post.user.username}}</h2>
+                    <p>{{post.user.sha256}}</p>
+                    <i class="icon ion-chevron-right icon-accessory"></i>
+                </ion-item>
+            </ion-list>
+            <ion-infinite-scroll on-infinite="loadMore()" distance="5%"></ion-infinite-scroll>
+        </ion-content>
+    </ion-view>

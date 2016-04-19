@@ -1,0 +1,33 @@
+<ion-view>
+    <ion-header-bar>
+        <h1 class="title">Menu</h1>
+    </ion-header-bar>
+    <ion-header-bar class="menu-header menu-header-auth bar-subheader">
+        <ion-item class="item-icon-left" ng-click="auth.logged_in = false" href="#/app/journal/{{conf.current}}">
+            <i class="icon ion-log-out"></i>Logout
+        </ion-item>
+
+
+        <ion-item class="menu-tabs tabs tabs-secondary tabs-icon-top">
+            <a class="tab-item" ng-click="main.show_list = 'bookmarks';" ng-class="{'active': main.show_list === 'bookmarks'}">
+                <i class="icon" ng-class="main.show_list === 'bookmarks' ? 'ion-ios-bookmarks' : 'ion-ios-bookmarks-outline'">
+                </i> Bookmarks
+            </a>
+            <a class="tab-item" ng-click="main.show_list = 'friends';" ng-class="{'active': main.show_list === 'friends'}">
+                <i class="icon" ng-class="main.show_list === 'friends' ? 'ion-ios-heart' : 'ion-ios-heart-outline'">
+                </i> Friends
+            </a>
+            <a class="tab-item" ng-click="main.show_list = 'groups';" ng-class="{'active': main.show_list === 'groups'}">
+                <i class="icon" ng-class="main.show_list === 'groups' ? 'ion-ios-chatboxes' : 'ion-ios-chatboxes-outline'">
+                </i> Groups
+            </a>
+        </ion-item>
+
+
+    </ion-header-bar>
+
+    <div ng-show="main.show_list === 'bookmarks'" ng-include="'views/menu-bookmarks.html'"></div>
+    <div ng-show="main.show_list === 'friends'" ng-include="'views/menu-friends.html'"></div>
+    <div ng-show="main.show_list === 'groups'" ng-include="'views/menu-groups.html'"></div>
+
+</ion-view>

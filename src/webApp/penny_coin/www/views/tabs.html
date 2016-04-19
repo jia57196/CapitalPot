@@ -1,0 +1,14 @@
+    <ion-tabs class="tabs-icon-top tabs-color-active-positive">
+        <ion-tab title="Messages" icon-off="ion-ios-email-outline" icon-on="ion-ios-email" href="#/app/tab/messages">
+            <ion-nav-view name="tab-messages"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Journal" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/app/tab/journal/{{conf.current}}">
+            <ion-nav-view name="tab-journal"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Friends" icon-off="ion-ios-people-outline" icon-on="ion-ios-people" href="#/app/tab/friends/posts">
+            <ion-nav-view name="tab-friends"></ion-nav-view>
+        </ion-tab>
+        <ion-tab title="Favourites" icon-off="ion-ios-star-outline" icon-on="ion-ios-star" href="#/app/tab/favourites">
+            <ion-nav-view name="tab-favourites"></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
