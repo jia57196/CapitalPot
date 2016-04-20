@@ -6,26 +6,6 @@
         </ion-nav-buttons-->
 
         <ion-content>
-            <ion-list show-delete="data.showDelete">
-
-                <ion-item ng-repeat="email in emails" class="email-item item-button-right item-icon-left item-remove-animate" ng-if="data.mode != 'receive' || email.flagged" href="#/app/tab/messages/{{data.mode}}/{{email.id}}">
-                    <i class="icon" ng-class="{'ion-ios-email-outline': email.was_read, 'ion-ios-email energized': !email.was_read}"></i>
-                    <h2>{{email.subject}}</h2>
-                    <p>
-                        <span class="email-text">
-      {{email.from}}
-    </span>
-                        <span class="item-note email-text">
-      {{email.date | date:'EEE M/d/yyyy h:mm a'}}
-    </span>
-                    </p>
-                    <button class="button button-clear email-flag-button" ng-click="onEmailFlag(email, $event)">
-                        <i class="icon" ng-class="{'ion-flag assertive': email.flagged, 'ion-flag': !email.flagged}"></i>
-                    </button>
-
-                    <ion-delete-button class="email-delete-button ion-minus-circled" ng-click="onEmailDelete(email)">
-                    </ion-delete-button>
-                </ion-item>
-            </ion-list>
+ 
         </ion-content>
     </ion-view>

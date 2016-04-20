@@ -117,21 +117,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('app.tab.chat', {
-        url: '/chat/posts',
+        url: '/chat',
         views: {
             'tab-chat': {
-                templateUrl: 'views/tab-feed.html',
-                controller: 'FriendsCtrl'
+                templateUrl: 'views/tab-chat.html',
+                controller: 'ChatCtrl'
             }
         }
     })
 
-    .state('app.tab.chat-post', {
-        url: '/chat/posts/:postId',
+    .state('app.tab.chat-detail', {
+        url: '/chat/:chatId',
         views: {
             'tab-chat': {
-                templateUrl: 'views/view-post.html',
-                controller: 'PostCtrl'
+                templateUrl: 'views/tab-chat-detail.html',
+                controller: 'ChatDetailCtrl'
             }
         }
     })
@@ -151,7 +151,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet': {
                 templateUrl: 'views/wallet/tab-wallet.html',
-                controller: 'MessagesCtrl'
+                controller: 'WalletCtrl'
             }
         }
     })
@@ -161,7 +161,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-all': {
                 templateUrl: 'views/wallet/tab-wallet-list.html',
-                controller: 'MessageListCtrl'
+                controller: 'WalletListCtrl'
             }
         },
         resolve: {
@@ -176,7 +176,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-all': {
                 templateUrl: 'views/wallet/view-wallet.html',
-                controller: 'MessageViewCtrl'
+                controller: 'WalletViewCtrl'
             }
         },
         resolve: {
@@ -191,7 +191,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-sent': {
                 templateUrl: 'views/wallet/tab-wallet-list.html',
-                controller: 'MessageListCtrl'
+                controller: 'WalletListCtrl'
             }
         },
         resolve: {
@@ -206,7 +206,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-sent': {
                 templateUrl: 'views/wallet/view-wallet.html',
-                controller: 'MessageViewCtrl'
+                controller: 'WalletViewCtrl'
             }
         },
         resolve: {
@@ -221,7 +221,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-receive': {
                 templateUrl: 'views/wallet/tab-wallet-list.html',
-                controller: 'MessageListCtrl'
+                controller: 'WalletListCtrl'
             }
         },
         resolve: {
@@ -236,7 +236,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-receive': {
                 templateUrl: 'views/wallet/view-wallet.html',
-                controller: 'MessageViewCtrl'
+                controller: 'WalletViewCtrl'
             }
         },
         resolve: {

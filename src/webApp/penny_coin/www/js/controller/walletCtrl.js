@@ -2,11 +2,11 @@ angular.module('ionicApp.controllers.wallet', [])
 
 
 
-.controller('MessagesCtrl', function($scope) {
+.controller('WalletCtrl', function($scope) {
 
 })
 
-.controller('MessageListCtrl', function(mode, $rootScope, $rootScope, $scope, EmailService) {
+.controller('WalletListCtrl', function(mode, $rootScope, $rootScope, $scope, EmailService) {
 
     $scope.emails = [];
 
@@ -19,15 +19,15 @@ angular.module('ionicApp.controllers.wallet', [])
     $scope.setListData = function() {
         switch (mode) {
             case 'all':
-                $scope.data.title = 'All';
+                $scope.data.title = 'My Wallet - Balance';
                 $scope.emails = EmailService.getInboxEmails();
                 break;
             case 'receive':
-                $scope.data.title = 'Receive';
+                $scope.data.title = 'My Wallet - Receive';
                 $scope.emails = EmailService.getInboxEmails();
                 break;
             case 'sent':
-                $scope.data.title = 'Sent';
+                $scope.data.title = 'My Wallet - Send';
                 $scope.emails = EmailService.getOutboxEmails();
                 break;
             default:
@@ -37,24 +37,8 @@ angular.module('ionicApp.controllers.wallet', [])
 
     $scope.setListData();
 
-    $scope.onEmailFlag = function(email, e) {
-        email.flagged = !email.flagged;
-        e.preventDefault();
-        $rootScope.emailCounts.flaggedCount = EmailService.getFlaggedEmailCount();
-    };
-
-    $scope.onEmailDelete = function(email) {
-        $scope.emails.splice($scope.emails.indexOf(email), 1);
-    };
 })
 
-.controller('MessageViewCtrl', function(mode, $stateParams, $scope, $timeout, EmailService) {
-    if (mode == 'sent') {
-        $scope.email = EmailService.getOutboxEmail($stateParams.id);
-    } else {
-        $scope.email = EmailService.getInboxEmail($stateParams.id);
-    }
-    $timeout(function() {
-        $scope.email.was_read = true;
-    }, 500);
+.controller('WalletViewCtrl', function(mode, $stateParams, $scope, $timeout, EmailService) {
+
 });
