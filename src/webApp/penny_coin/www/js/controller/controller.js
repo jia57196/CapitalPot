@@ -1,5 +1,5 @@
 
-angular.module('ionicApp.controllers', [])
+angular.module('ionicApp.controllers',[])
 
 .controller('AppCtrl', function($scope, UserSrvc, AuthSrvc, ConfSrvc) {
     $scope.placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';

@@ -1,5 +1,11 @@
-var app = angular.module('ionicApp', ['ionic', 'ionicApp.controllers', 
-    'ionicApp.services', 'ionicApp.controllers.menu', 'ionicApp.controllers.wallet']);
+var app = angular.module('ionicApp', 
+    ['ionic', 
+     'ionicApp.controllers', 
+     'ionicApp.services', 
+     'ionicApp.controllers.menu', 
+     'ionicApp.controllers.wallet',
+     'ionicApp.controllers.rates',
+     'highcharts-ng']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,30 +23,6 @@ app.run(function($ionicPlatform) {
       StatusBar.styleDefault();
     }
   });
-})
-
-.factory('Currencies', function () {
-  return [
-    { code: 'AUD', text: 'Australian Dollar', selected: true },
-    { code: 'BRL', text: 'Brazilian Real', selected: false },
-    { code: 'CAD', text: 'Canadian Dollar', selected: true },
-    // { code: 'CHF', text: 'Swiss Franc', selected: false }, Disabled CHF because the API no longer returns it
-    { code: 'CNY', text: 'Chinese Yuan', selected: true},
-    { code: 'EUR', text: 'Euro', selected: true },
-    { code: 'GBP', text: 'British Pound Sterling', selected: true },
-    { code: 'IDR', text: 'Indonesian Rupiah', selected: false },
-    { code: 'ILS', text: 'Israeli New Sheqel', selected: false },
-    { code: 'MXN', text: 'Mexican Peso', selected: true },
-    { code: 'NOK', text: 'Norwegian Krone', selected: false },
-    { code: 'NZD', text: 'New Zealand Dollar', selected: false },
-    { code: 'PLN', text: 'Polish Zloty', selected: false },
-    { code: 'RON', text: 'Romanian Leu', selected: false },
-    { code: 'RUB', text: 'Russian Ruble', selected: true },
-    { code: 'SEK', text: 'Swedish Krona', selected: false },
-    { code: 'SGD', text: 'Singapore Dollar', selected: false },
-    { code: 'USD', text: 'United States Dollar', selected: true },
-    { code: 'ZAR', text: 'South African Rand', selected: false }
-  ];
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {
@@ -72,11 +54,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('app.rates', {
-        url: '/rates/:rates',
+        url: '/rates',
         views: {
             'menu-content': {
-                templateUrl: 'views/rates/tab-rates.html',
-                controller: 'RatesCtrl'
+                templateUrl: 'views/rates/tab-rates.html'
             },
             'menu-left': {
                 templateUrl: 'views/menu-anon.html'
@@ -88,7 +69,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state('app.tab.rates', {
-        url: '/rates/:rates',
+        url: '/rates',
         views: {
             'tab-rates': {
                 templateUrl: 'views/rates/tab-rates.html',
@@ -107,7 +88,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
     .state('app.tab.rates.history', {
-        url: '/history',
+        url: '/history?currency',
+        cache: false,
         views: {
             'tab-rates-history': {
                 templateUrl: 'views/rates/tab-rates-history.html',
@@ -118,7 +100,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('app.tab.rates.detail', {
       url: '/detail/:currency',
       views: {
-        'rates-tab': {
+         'tab-rates-view': {
           templateUrl: 'views/rates/detail.html',
           controller: 'DetailController'
         }
@@ -265,13 +247,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
     $urlRouterProvider.otherwise(function($injector, $location) {
-        var path = '/app/rates/';
+        var path = '/app/rates/view';
         var cs = $injector.get('ConfSrvc');
         var as = $injector.get('AuthSrvc');
         if (as.logged_in) {
-            path = '/app/tab/rates/';
+            path = '/app/tab/rates/view';
         }
-        $location.path(path + cs.current);
+        $location.path(path);
     });
 
 });
