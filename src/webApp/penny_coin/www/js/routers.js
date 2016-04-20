@@ -5,7 +5,8 @@ var app = angular.module('ionicApp',
      'ionicApp.controllers.menu', 
      'ionicApp.controllers.wallet',
      'ionicApp.controllers.rates',
-     'highcharts-ng']);
+     'highcharts-ng',
+     'ngCordova']);
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

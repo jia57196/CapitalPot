@@ -93,3 +93,10 @@
 .item .price.negative {
   background: #ef4e3a;
 }
+
+#map{
+    width:90%;
+    height:600px;
+    margin:5px auto;
+    box-shadow:0 3px 25px black;
+}
