@@ -1,4 +1,4 @@
-angular.module('ionicApp.controllers.menu', [])
+angular.module('ionicApp.controllers')
 
 .controller('MenuCtrl', function($scope, $ionicPopover) {
     $scope.main = {

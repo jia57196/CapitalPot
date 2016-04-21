@@ -1,0 +1,43 @@
+<ion-view title="{{wallet.name|capitalize}} Wallet" hide-back-button="true">
+  
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+  </ion-nav-buttons>
+
+  <ion-content class="has-header padding">
+
+    <p>show me</p>
+
+    <div class="card" ng-show="wallet.publicKeyRing.isComplete()">
+      <div class="item item-divider">
+        Balance
+      </div>
+      <div class="item item-text-wrap">
+        <i class="icon ion-social-bitcoin"></i> {{wallet.balance|displayBtc}} ~= {{wallet.balance|displayFiat}}
+      </div>
+    </div>
+
+    <button
+      class="button button-block button-positive icon ion-plus"
+      ng-hide="wallet.publicKeyRing.isComplete()"
+      ng-click="inviteCopayers()">
+      Invite Copayers
+    </button>
+
+    <div class="card">
+      <div class="item item-divider">
+        Copayers
+        <span class="item-note">{{wallet.requiredCopayers}} of {{wallet.totalCopayers}}</span>
+      </div>
+      <div class="item item-avatar" ng-repeat="copayer in copayers">
+        <img gravatar-src-once="copayer.nick"/>
+        <h2 class="text-gray">{{copayer|displayNick:wallet}}</h2>
+      </div>
+      <div class="item item-avatar" ng-show="remaining > 0">
+        <i class="icon ion-loading-c"></i>
+        <h2>Waiting for {{remaining}} copayers to join...</h2>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -1,5 +1,5 @@
 
-angular.module('ionicApp.controllers',[])
+angular.module('ionicApp.controllers')
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
@@ -49,25 +49,6 @@ angular.module('ionicApp.controllers',[])
     }
   };
 })
-
-.controller('AppCtrl', function($scope, UserSrvc, AuthSrvc, ConfSrvc) {
-    $scope.placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-    $scope.bookmarks = [];
-    UserSrvc.GetUsers(5).then(function(items) {
-        $scope.bookmarks = items;
-    });
-    $scope.friends = [];
-    UserSrvc.GetUsers(7).then(function(items) {
-        $scope.friends = items;
-    });
-    $scope.groups = [];
-    UserSrvc.GetUsers(3).then(function(items) {
-        $scope.groups = items;
-    });
-    $scope.auth = AuthSrvc;
-    $scope.conf = ConfSrvc;
-})
-
 
 .controller('ChatCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();

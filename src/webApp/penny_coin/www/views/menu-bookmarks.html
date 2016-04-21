@@ -1,5 +1,6 @@
+
     <ion-view>
-        <ion-content ng-class="auth.logged_in ? 'menu-list-auth' : 'menu-list-anon'">
+         <ion-content class="has-header" ng-class="auth.logged_in ? 'menu-list-auth' : 'menu-list-anon'">
           <ul class="list">
             <li>
               <a class="item" menu-close nav-clear href="#/">Tips on Everyday</a>
@@ -7,6 +8,10 @@
             <li>
               <a class="item" menu-close ng-click="openHelp($event)">About</a>
             </li>
+            <li>
+              <a class="item" menu-close href="#/app/tab/wallet/home/202">test the wallet home</a>
+            </li>
           </ul>
+       
         </ion-content>
     </ion-view>

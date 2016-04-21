@@ -1,6 +1,6 @@
 
 
-angular.module('ionicApp.controllers.rates', [])
+angular.module('ionicApp.controllers')
 
 .controller('RatesCtrl', function ($scope, $http, Currencies) {
   

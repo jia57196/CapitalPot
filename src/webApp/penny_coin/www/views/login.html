@@ -1,0 +1,32 @@
+<ion-view title="Login" ng-controller="loginCtrl">
+
+  <ion-content>
+    <form name="form" ng-submit="submit(form)" class="error-icons" novalidate>
+      <div class="list">
+        <label class="item errors" ng-show="error">
+          <ul>
+            <li>{{error}}</li>
+          </ul>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="email" ng-model="profile.email" required>
+          <i class="icon ion-alert-circled error"></i>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" ng-model="profile.password" required>
+          <i class="icon ion-alert-circled error"></i>
+        </label>
+
+        <label class="item">
+          <button class="button button-block button-positive" type="submit"  ng-disabled="!form.$valid">Log in</button>
+        </label>
+      </div>
+    </form>
+
+    </label>
+          <a href="#/app/register" class='button-css '>New User?</a>
+    </label>
+  </ion-content>
+</ion-view>

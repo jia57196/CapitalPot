@@ -1,5 +1,5 @@
 
-angular.module('ionicApp.services', [])
+angular.module('ionicApp.services')
 
 .factory('Currencies', function () {
   return [
@@ -246,3 +246,4 @@ angular.module('ionicApp.services', [])
         }
     }
 });
+

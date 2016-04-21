@@ -1,30 +1,4 @@
-var app = angular.module('ionicApp', 
-    ['ionic', 
-     'ionicApp.controllers', 
-     'ionicApp.services', 
-     'ionicApp.controllers.menu', 
-     'ionicApp.controllers.wallet',
-     'ionicApp.controllers.rates',
-     'highcharts-ng',
-     'ngCordova']);
-
-app.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-});
+var app = angular.module('ionicApp');
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -33,8 +7,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('app', {
         url: '/app',
         abstract: true,
-        templateUrl: 'views/menu.html',
-        controller: 'AppCtrl'
+        templateUrl: 'views/menu.html'
     })
 
     .state('app.tab', {
@@ -53,7 +26,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }    
         }
     })
-
+    .state('app.login', {
+        url: '/login',
+        cache: false,
+        views: {
+            'menu-content': {
+                templateUrl: 'views/login.html',
+                controller: 'loginCtrl'
+            },
+            'menu-left': {
+                templateUrl: 'views/menu-anon.html',
+                controller: 'MenuCtrl'
+            }            
+        }
+    })
+    .state('app.register', {
+        url: '/register',
+        cache:false,
+        views: {
+            'menu-content': {
+                templateUrl: 'views/user/register.html',
+                controller: 'registerCtrl'
+            },
+            'menu-left': {
+                templateUrl: 'views/menu-anon.html',
+                controller: 'MenuCtrl'
+            }            
+        }
+    })    
     .state('app.rates', {
         url: '/rates',
         views: {
@@ -61,7 +61,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 templateUrl: 'views/rates/tab-rates.html'
             },
             'menu-left': {
-                templateUrl: 'views/menu-anon.html'
+                templateUrl: 'views/menu-auth.html'
             },
             'menu-right': {
                 templateUrl: 'views/menu-setting.html'
@@ -75,7 +75,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             'tab-rates': {
                 templateUrl: 'views/rates/tab-rates.html',
                 controller: 'RatesCtrl'
-            }
+            }      
         }
     })
 
@@ -161,7 +161,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/all',
         views: {
             'tab-wallet-all': {
-                templateUrl: 'views/wallet/tab-wallet-list.html',
+                templateUrl: 'views/wallet/balance.html',
                 controller: 'WalletListCtrl'
             }
         },
@@ -172,12 +172,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     })
 
-    .state('app.tab.wallet.all-view', {
-        url: '/all/:id',
+    .state('app.tab.wallet.home', {
+        url: '/home/:id',
         views: {
             'tab-wallet-all': {
-                templateUrl: 'views/wallet/view-wallet.html',
-                controller: 'WalletViewCtrl'
+                templateUrl: 'views/wallet/wallet-home.html',
+                controller: 'HomeCtrl'
             }
         },
         resolve: {
@@ -191,7 +191,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/sent',
         views: {
             'tab-wallet-sent': {
-                templateUrl: 'views/wallet/tab-wallet-list.html',
+                templateUrl: 'views/wallet/sent.html',
                 controller: 'WalletListCtrl'
             }
         },
@@ -206,7 +206,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/sent/:id',
         views: {
             'tab-wallet-sent': {
-                templateUrl: 'views/wallet/view-wallet.html',
+                templateUrl: 'views/wallet/sent-detail.html',
                 controller: 'WalletViewCtrl'
             }
         },
@@ -221,7 +221,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/receive',
         views: {
             'tab-wallet-receive': {
-                templateUrl: 'views/wallet/tab-wallet-list.html',
+                templateUrl: 'views/wallet/receive.html',
                 controller: 'WalletListCtrl'
             }
         },
@@ -236,7 +236,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/receive/:id',
         views: {
             'tab-wallet-receive': {
-                templateUrl: 'views/wallet/view-wallet.html',
+                templateUrl: 'views/wallet/receive-detail.html',
                 controller: 'WalletViewCtrl'
             }
         },
@@ -248,7 +248,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
     $urlRouterProvider.otherwise(function($injector, $location) {
-        var path = '/app/rates/view';
+        var path = '/app/rates';
         var cs = $injector.get('ConfSrvc');
         var as = $injector.get('AuthSrvc');
         if (as.logged_in) {

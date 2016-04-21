@@ -44,34 +44,10 @@
     display: none;
 }
 /* Messages */
-
-.email-flag-button {
-    margin-top: 12px !important;
-    padding: 0 !important;
+.item {
+  color: #7A8C9E;
+  border-color: #D8DCE1;
 }
-
-.email-delete-button {
-    padding-left: 4px !important;
-}
-
-.email-item {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-.email-text {
-    font-size: smaller !important;
-    color: grey !important;
-}
-
-.email-body-text {
-    font-size: smaller !important;
-}
-
-.email-item-text {
-    margin-left: 26px;
-}
-
 
 .item .price {
   font-weight: bold;

@@ -1,6 +1,4 @@
-angular.module('ionicApp.controllers.wallet', [])
-
-
+angular.module('ionicApp.controllers')
 
 .controller('WalletCtrl', function($scope) {
 
@@ -36,9 +34,5 @@ angular.module('ionicApp.controllers.wallet', [])
     };
 
     $scope.setListData();
-
-})
-
-.controller('WalletViewCtrl', function(mode, $stateParams, $scope, $timeout, EmailService) {
 
 });
