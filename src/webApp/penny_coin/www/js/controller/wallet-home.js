@@ -11,8 +11,8 @@ angular.module('ionicApp.controllers')
   $scope.wallet.on('publicKeyRingUpdated', loadCopayers);
 
   function loadCopayers() {
-    $scope.copayers = $scope.wallet.getRegisteredPeerIds(); // TODO: Rename method to getCopayers
-    $scope.remaining = $scope.wallet.publicKeyRing.remainingCopayers(); // TODO: Expose on Wallet
+    //$scope.copayers = $scope.wallet.getRegisteredPeerIds(); // TODO: Rename method to getCopayers
+    //$scope.remaining = $scope.wallet.publicKeyRing.remainingCopayers(); // TODO: Expose on Wallet
     setTimeout(function(){ $scope.$apply(); }, 10);
   }
 
@@ -22,9 +22,30 @@ angular.module('ionicApp.controllers')
   }
 
   $rootScope.$on('balance', function(ev, wallet) {
-
-    
     if ($scope.wallet.id == wallet.id) $scope.$apply();
   });
 
+
+  $scope.data = {
+      mode: mode,
+      title: ''
+  };
+
+  $scope.setListData = function() {
+      switch (mode) {
+          case 'all':
+              $scope.data.title = 'My Wallet - Balance';
+              break;
+          case 'receive':
+              $scope.data.title = 'My Wallet - Receive';
+              break;
+          case 'sent':
+              $scope.data.title = 'My Wallet - Send';
+              break;
+          default:
+              $scope.data.title = 'E-Mails';
+      }
+  };
+
+  $scope.setListData();
 });

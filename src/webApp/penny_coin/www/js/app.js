@@ -5,6 +5,8 @@ var app = angular.module('ionicApp',
     ['ionic', 
      'ionicApp.services', 
      'ionicApp.controllers', 
+     'ionicApp.directives',
+     'ionicApp.filters',     
      'highcharts-ng',
      'ngCordova']);
 

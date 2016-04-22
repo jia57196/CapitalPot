@@ -19,4 +19,16 @@ angular.module('ionicApp.controllers')
 	  $scope.popover.remove();
 	});
 
+})
+
+// Note that Addresses, History are only injected to initializate them ASAP
+.controller('TabsCtrl', function($scope, $state, $stateParams, Session, Wallets, 
+	Proposals, Addresses, History) {
+  $scope.wallet = Session.currentWallet = Wallets.get($stateParams.walletId);
+
+  $scope.pendingProposals = function() {
+    if (!$scope.wallet || !$scope.wallet.isShared()) return 0;
+    return Proposals.filter($scope.wallet, { status: Proposals.STATUS.pending }).length;
+  };
+
 });

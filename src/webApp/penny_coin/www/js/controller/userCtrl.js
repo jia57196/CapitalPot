@@ -1,7 +1,8 @@
 angular.module('ionicApp.controllers')
 
 
-.controller('loginCtrl', function($scope, $state, $ionicLoading, Identity, $ionicPopup, Session) {
+.controller('loginCtrl', function($scope, $state, $ionicLoading, Identity, 
+	$ionicPopup, Session) {
 
 	$scope.onNewProfile = function(){
 		console.log('the new profile button is pressed.');

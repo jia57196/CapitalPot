@@ -22,7 +22,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 controller: 'MenuCtrl'
             },
             'menu-right': {
-                templateUrl: 'views/menu-setting.html'
+                templateUrl: "views/settings.html",
+                controller: "SettingsCtrl"
             }    
         }
     })
@@ -37,7 +38,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
             'menu-left': {
                 templateUrl: 'views/menu-anon.html',
                 controller: 'MenuCtrl'
-            }            
+            },
+            'menu-right': {
+                templateUrl: "views/settings.html",
+                controller: "SettingsCtrl"
+            }               
         }
     })
     .state('app.register', {
@@ -51,9 +56,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
             'menu-left': {
                 templateUrl: 'views/menu-anon.html',
                 controller: 'MenuCtrl'
-            }            
+            },
+            'menu-right': {
+                templateUrl: "views/settings.html",
+                controller: "SettingsCtrl"
+            }    
         }
-    })    
+    })
     .state('app.rates', {
         url: '/rates',
         views: {
@@ -62,10 +71,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             },
             'menu-left': {
                 templateUrl: 'views/menu-auth.html'
-            },
-            'menu-right': {
-                templateUrl: 'views/menu-setting.html'
-            }            
+            }          
         }
     })
 
@@ -152,22 +158,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet': {
                 templateUrl: 'views/wallet/tab-wallet.html',
-                controller: 'WalletCtrl'
-            }
-        }
-    })
-
-    .state('app.tab.wallet.all', {
-        url: '/all',
-        views: {
-            'tab-wallet-all': {
-                templateUrl: 'views/wallet/balance.html',
-                controller: 'WalletListCtrl'
-            }
-        },
-        resolve: {
-            mode: function() {
-                return 'all';
+                controller: 'TabsCtrl'
             }
         }
     })
@@ -258,3 +249,34 @@ app.config(function($stateProvider, $urlRouterProvider) {
     });
 
 });
+
+
+app.run(['$state', '$window', function ($state, $window, Decoder) {
+
+  function handleBitcoinIntent(url) {
+    Decoder.process(data);
+  }
+
+  $window.handleOpenURL = handleBitcoinIntent;
+}]);
+
+app.run(['$rootScope', '$state', 'Session', function ($rootScope, $state, Session) {
+
+  $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+
+    // Redirect to PIN screen
+    if (!Session.isLogged() && Session.hasCredentials() && toState.name != 'pin') {
+      event.preventDefault();
+      return $state.go('pin', toParams);
+    }
+
+    // If not logged redirect to home
+    var isPrivate = !!(toState.data && toState.data.auth);
+    if (!Session.isLogged() && !Session.hasCredentials() && isPrivate) {
+      event.preventDefault();
+      return $state.go('start.welcome');
+    }
+
+  });
+
+}]);
