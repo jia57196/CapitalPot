@@ -8,6 +8,7 @@ angular.module('ionicApp.services')
 
   var Identity = angular.extend({}, copay.Identity);
 
+
   Identity.createProfile = function(p, callback) {
     var opts = angular.copy(Config.identity);
     opts.email = p.email;

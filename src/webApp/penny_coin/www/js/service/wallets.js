@@ -39,9 +39,22 @@ angular.module('ionicApp.services')
     Session.identity.joinWallet(opts, cb); // TODO: Use directlly
   };
 
+  /*if("<property name>" in myObj) {
+      alert("yes, i have that property");
+
+    if (myObj.hasOwnProperty('myProp')) {
+    // do something
+    }
+  }*/
   Wallets.all = function() {
-    var wallets = Object.keys(Session.identity.wallets);
-    return wallets.map(this.get.bind(this));
+    if (Session.hasOwnProperty('identity')) {
+      if (Session.identity !== null && Session.identity.hasOwnProperty('wallets')){
+        var wallets = Object.keys(Session.identity.wallets);
+        return wallets.map(this.get.bind(this));
+      }
+      return null;
+    }
+    return null;
   }
 
   Wallets.get = function(id) {

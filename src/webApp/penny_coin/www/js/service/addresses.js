@@ -9,7 +9,9 @@ angular.module('ionicApp.services')
     this.addresses = {};
 
     var self = this;
-    Wallets.all().forEach(self.subscribeWallet.bind(self));
+    if (Wallets.all() !== null){
+      Wallets.all().forEach(self.subscribeWallet.bind(self));  
+    }
 
     $rootScope.$on('new-wallet', function(ev, wallet) {
       self.subscribeWallet(wallet);
