@@ -58,10 +58,16 @@ angular.module('ionicApp.services')
   }
 
   Wallets.get = function(id) {
-    var wallet = Session.identity.wallets[id];
-    window.W = wallet;
-    window.I = Session.identity;
-    return wallet;
+    if (Session.hasOwnProperty('identity')) {
+      if (Session.identity !== null && Session.identity.hasOwnProperty('wallets')){    
+        var wallet = Session.identity.wallets[id];
+        window.W = wallet;
+        window.I = Session.identity;
+        return wallet;
+      }
+      return null;
+    }
+    return null;
   }
 
   return Wallets;

@@ -27,13 +27,14 @@ angular.module('ionicApp.services')
     url: 'https://insight.bitpay.com:443/api/email',
   };
 
+  //https://test-insight.bitpay.com:443
   config.network = {
     testnet: {
-      url: 'https://test-insight.bitpay.com:443',
+      url: 'http://192.168.164.145:3001/insight/',
       transports: ['polling']
     },
     livenet: {
-      url: 'https://insight.bitpay.com:443',
+      url: 'http://192.168.164.145:3001/insight/',
       transports: ['polling']
     }
   };

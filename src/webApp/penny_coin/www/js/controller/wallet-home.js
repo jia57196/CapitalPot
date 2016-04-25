@@ -8,8 +8,10 @@ angular.module('ionicApp.controllers')
   angular.extend(this, $controller('AbstractModalCtrl', {$scope: $scope}));
 
   loadCopayers();
-  $scope.wallet.on('publicKeyRingUpdated', loadCopayers);
-
+  if ($scope.wallet !== null) {
+    $scope.wallet.on('publicKeyRingUpdated', loadCopayers);
+  }
+  
   function loadCopayers() {
     //$scope.copayers = $scope.wallet.getRegisteredPeerIds(); // TODO: Rename method to getCopayers
     //$scope.remaining = $scope.wallet.publicKeyRing.remainingCopayers(); // TODO: Expose on Wallet

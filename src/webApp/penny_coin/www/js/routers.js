@@ -162,6 +162,20 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     })
+    .state('app.tab.wallet.all', {
+        url: '/all',
+        views: {
+            'tab-wallet-all': {
+                templateUrl: 'views/wallet/wallet-home.html',
+                controller: 'HomeCtrl'
+            }
+        },
+        resolve: {
+            mode: function() {
+                return 'all';
+            }
+        }
+    })
 
     .state('app.tab.wallet.home', {
         url: '/home/:id',
@@ -183,22 +197,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-sent': {
                 templateUrl: 'views/wallet/sent.html',
-                controller: 'WalletListCtrl'
-            }
-        },
-        resolve: {
-            mode: function() {
-                return 'sent';
-            }
-        }
-    })
-
-    .state('app.tab.wallet.sent-view', {
-        url: '/sent/:id',
-        views: {
-            'tab-wallet-sent': {
-                templateUrl: 'views/wallet/sent-detail.html',
-                controller: 'WalletViewCtrl'
+                controller: 'SendCtrl'
             }
         },
         resolve: {
@@ -213,22 +212,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
         views: {
             'tab-wallet-receive': {
                 templateUrl: 'views/wallet/receive.html',
-                controller: 'WalletListCtrl'
-            }
-        },
-        resolve: {
-            mode: function() {
-                return 'receive';
-            }
-        }
-    })
-
-    .state('app.tab.wallet.receive-view', {
-        url: '/receive/:id',
-        views: {
-            'tab-wallet-receive': {
-                templateUrl: 'views/wallet/receive-detail.html',
-                controller: 'WalletViewCtrl'
+                controller: 'ReceiveCtrl'
             }
         },
         resolve: {
@@ -237,6 +221,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         }
     });
+
 
     $urlRouterProvider.otherwise(function($injector, $location) {
         var path = '/app/rates';

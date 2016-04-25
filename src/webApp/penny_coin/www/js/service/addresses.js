@@ -51,7 +51,10 @@ angular.module('ionicApp.services')
   };
 
   Addresses.prototype.filter = function(wallet) {
-    return this.addresses[wallet.id];
+    if (wallet !== null && wallet.hasOwnProperty('id') === true ){
+      return this.addresses[wallet.id];  
+    }
+    return null;
   };
 
   Addresses.prototype.createAddress = function(wallet) {

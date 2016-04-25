@@ -3,22 +3,27 @@
   <head>
     <meta charset="UTF-8">
     <title>Penny Pig Coin</title>
-  
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/copay.style.css">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-        <title></title>
+             
+        <!-- compiled css output -->
+        <link href="css/copay.style.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">        
 
         <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+
+        <!-- ionic/angularjs js -->
         <script src="lib/ionic/js/ionic.bundle.js"></script>
+       
+        <!-- cordova script (this will be a 404 during development) -->
+        <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+        <script src="cordova.js"></script>
+        
+        <script src="lib/angular/angular.min.js"></script>
         <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
         <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script src="lib/highcharts-ng/dist/highcharts-ng.js"></script>
         <script src="lib/highcharts/adapters/standalone-framework.js"></script>
         <script src="lib/highcharts/highcharts.js"></script>
-
-        <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-        <script src="cordova.js"></script>
 
         <!-- dependencies -->
         <script src="lib/angular-qrcode/qrcode.js"></script>
@@ -57,6 +62,7 @@
         <script src="js/service/session.js"></script>
         <!--script src="js/services/sweep.js"></script-->
         <script src="js/service/wallets.js"></script>
+        <script src="js/service/paypro.js"></script>
 
         <!-- controllers -->
         <script src="js/controller/controller.js"></script>
@@ -67,7 +73,9 @@
         <script src="js/controller/abstract-modal.js"></script>
         <script src="js/controller/wallet-home.js"></script>
         <script src="js/controller/settings.js"></script>
-        
+        <script src="js/controller/send.js"></script>
+        <script src="js/controller/receive.js"></script>
+
   </head>
 
   <body ng-app="ionicApp">

@@ -15,6 +15,9 @@ angular.module('ionicApp.services')
   }
 
   Proposals.prototype.filter = function(wallet, filters) {
+    if (wallet === null){
+      return null;
+    }
     if (!filters) return this.all(wallet);
 
     return this.all(wallet).filter(testProposal);
@@ -32,6 +35,9 @@ angular.module('ionicApp.services')
 
   // TODO: All this processing should be done by Copay Lib!
   Proposals.prototype.all = function(wallet) {
+    if (wallet === null){
+      return null;
+    }
     var self = this;
     var copayerId = wallet.getMyCopayerId();
     var proposals = wallet.getPendingTxProposals().sort(function(t1, t2) {

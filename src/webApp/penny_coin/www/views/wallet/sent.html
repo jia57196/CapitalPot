@@ -1,11 +1,21 @@
-    <ion-view view-title={{data.title}}>
+<ion-view title="{{wallet.name|capitalize}} Wallet" hide-back-button="true">
 
-        <!--ion-nav-buttons side="primary">
-            <button class="button button-icon icon ion-ios-minus-outline" ng-click="data.showDelete = !data.showDelete"></button>
-            //useless
-        </ion-nav-buttons-->
+  <ion-content class="has-header">
 
-        <ion-content>
- 			<p>show sent</p>
-        </ion-content>
-    </ion-view>
+     <div ng-include="'views/wallet/send-form.html'"></div>
+
+    <div class="card" ng-show="wallet.isShared() && proposals">
+      <div class="item item-divider">
+        Pending Proposal
+      </div>
+      <div class="item item-text-wrap" ng-repeat="proposal in proposals" ui-sref="profile.wallet.proposal({proposalId:proposal.id})">
+        {{proposal.total|displayBtc}} ~= {{proposal.total|displayFiat }}
+        <span class="comment" ng-show="proposal.comment"/>{{proposal.comment}}</span>
+        <span class="badge badge-energized" ng-show="proposal.awaitingAction">
+          <i class="icon ion-alert"></i>
+        </span>
+      </div>
+    </div> 
+
+  </ion-content>
+</ion-view>

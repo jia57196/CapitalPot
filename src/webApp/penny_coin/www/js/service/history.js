@@ -10,6 +10,9 @@ angular.module('ionicApp.services')
     this.transactions = {};
 
     var self = this;
+    if ( Wallets.all() === null) {
+      return;
+    }
     Wallets.all().forEach(function(wallet) {
       self.update(wallet);
 
