@@ -1,20 +1,25 @@
-
-
-from datetime import datetime
-datetime.strptime("2012-may-31 19:00", "%Y-%b-%d %H:%M")
-
+# Imports
+from pandas.io.data import get_data_yahoo
+from datetime import datetime, timedelta
+import matplotlib.dates as mdates
+from matplotlib.pyplot import subplots, draw
+from matplotlib.finance import candlestick_ohlc
 import matplotlib.pyplot as plt
-import datetime
-import numpy as np
 
-x = np.array([datetime.datetime(2013, 9, 28, i, 0) for i in range(24)])
-y = np.random.randint(100, size=x.shape)
+# get the data on a symbol (gets last 1 year)
+symbol = "TSLA"
+data = get_data_yahoo(symbol, datetime.now() - timedelta(days=365))
 
-my_dpi = 100
+# drop the date index from the dateframe
+data.reset_index(inplace = True)
 
-plt.figure(figsize=(800/my_dpi, 600/my_dpi), dpi=my_dpi)
-plt.plot(x,y)
-#plt.savefig(datetime.strftime("%Y-%m-%d_%H:%M:%S.%f"))
-plt.savefig('output.png', dpi=my_dpi)
+# convert the datetime64 column in the dataframe to 'float days'
+data.Date = mdates.date2num(data.Date.dt.to_pydatetime())
+# make an array of tuples in the specific order needed
+dataAr = [tuple(x) for x in data[['Date', 'Open', 'Close', 'High', 'Low']].to_records(index=False)]
+
+# construct and show the plot
+fig = plt.figure()
+ax1 = plt.subplot(1,1,1)
+candlestick_ohlc(ax1, dataAr)
 plt.show()
-

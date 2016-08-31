@@ -34,7 +34,7 @@ ENDIF()
 IF(NOT USE_TBB)
     SET(EXTRA_C_FLAGS " ${EXTRA_C_FLAGS} -pthread ")
 ENDIF()
-SET(EXTRA_C_FLAGS " ${EXTRA_C_FLAGS} -std=c++11 -Wall -Wpedantic -lgtest")
+SET(EXTRA_C_FLAGS " ${EXTRA_C_FLAGS} -std=c++11 -Wall -Wpedantic")
 SET(EXTRA_C_FLAGS_RELEASE " -O3 ")
 SET(EXTRA_C_FLAGS_DEBUG " -g3 ")
 
@@ -51,6 +51,8 @@ SET(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} ${EXTRA_EXE_LI
 set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/common)
 set(TEST_INCLUDES ${PROJECT_SOURCE_DIR}/test)
 set(COTS_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/cots)
+set(MUDUO_DIR ${PROJECT_SOURCE_DIR}/cots/muduo)
+
 
 add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
 enable_testing()
@@ -58,7 +60,7 @@ enable_testing()
 #------------------------------------------------
 # TARGETS
 #------------------------------------------------
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES})
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR})
 LINK_LIBRARIES(${REQUIRED_LIBRARIES} )
 
 #------------------------------------------------------
@@ -68,8 +70,6 @@ set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)  
 set(Boost_USE_STATIC_RUNTIME OFF) 
 find_package(Boost 1.55.0 COMPONENTS filesystem system program_options regex) 
-
-SET( BEACON_UNIT_TEST  ${PROJECT_NAME_STR}_test)
 
 file(GLOB MATCH_ENGINE_FILES        ${PROJECT_SOURCE_DIR}/src/matching_engine/*.cpp)
 file(GLOB TEST_SRC_FILES            ${PROJECT_SOURCE_DIR}/test/*.cpp)
@@ -85,7 +85,6 @@ endif()
 
 target_link_libraries(matching_engine
     pthread
-    gtest
     ${CMAKE_THREAD_LIBS_INIT})
 
 
