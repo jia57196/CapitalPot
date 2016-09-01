@@ -2,8 +2,13 @@
 #pragma once
 
 #include "transaction/Transaction.h"
-#include "muduo/base/Thread.h"
+#include "../threads/BaseThread.h"
 
-class BackendQueueProcessor : public muduo::Thread{
+class BackendQueueProcessor : public ThreadBase<BackendQueueProcessor>{
+public:
+	BackendQueueProcessor();
+	
+	~BackendQueueProcessor();
 
+	void run();
 };

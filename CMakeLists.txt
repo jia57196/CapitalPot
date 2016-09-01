@@ -52,6 +52,7 @@ set(COMMON_INCLUDES ${PROJECT_SOURCE_DIR}/common)
 set(TEST_INCLUDES ${PROJECT_SOURCE_DIR}/test)
 set(COTS_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/cots)
 set(MUDUO_DIR ${PROJECT_SOURCE_DIR}/cots/muduo)
+set(JSONCPP_DIR ${PROJECT_SOURCE_DIR}/cots/jsoncpp)
 
 
 add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
@@ -60,7 +61,7 @@ enable_testing()
 #------------------------------------------------
 # TARGETS
 #------------------------------------------------
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR})
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR} ${JSONCPP_DIR})
 LINK_LIBRARIES(${REQUIRED_LIBRARIES} )
 
 #------------------------------------------------------

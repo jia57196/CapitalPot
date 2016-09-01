@@ -1,3 +1,6 @@
 [submodule "cots/muduo"]
 	path = cots/muduo
 	url = https://github.com/chenshuo/muduo.git
+[submodule "cots/jsoncpp"]
+	path = cots/jsoncpp
+	url = https://github.com/open-source-parsers/jsoncpp.git

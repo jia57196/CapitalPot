@@ -1,8 +1,8 @@
 
+#pragma once
+
 #include <string>
 #include <deque>
-
-#pragma once
 
 typedef struct TradeOrderPair{
     std::string ClientId_;
