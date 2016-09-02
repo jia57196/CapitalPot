@@ -6,7 +6,6 @@ project(${PROJECT_NAME_STR} C CXX)
 # ----------------------------------------------------------------------------
 #   make the build folder, and cd build $$ cmake everything...
 # ----------------------------------------------------------------------------
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules")
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # ----------------------------------------------------------------------------
@@ -53,16 +52,26 @@ set(TEST_INCLUDES ${PROJECT_SOURCE_DIR}/test)
 set(COTS_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/cots)
 set(MUDUO_DIR ${PROJECT_SOURCE_DIR}/cots/muduo)
 set(JSONCPP_DIR ${PROJECT_SOURCE_DIR}/cots/jsoncpp)
-
+set(AZURE_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/includes)
+set(AZURE_LIB_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/build.release/Binaries)
 
 add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
+add_subdirectory(${COTS_PROJECTS_DIR}/azure)
+add_subdirectory(${PROJECT_SOURCE_DIR}/src/matching_engine)
 enable_testing()
 
 #------------------------------------------------
 # TARGETS
 #------------------------------------------------
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR} ${JSONCPP_DIR})
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR} ${JSONCPP_DIR} ${AZURE_INCLUDE_DIR})
 LINK_LIBRARIES(${REQUIRED_LIBRARIES} )
+
+#------------------------------------------------
+# find libs 
+#------------------------------------------------
+find_library(AZURE_LIBS 
+             NAMES azurestorage
+             HINTS "${AZURE_LIB_DIR}")
 
 #------------------------------------------------------
 # Boost Lib Names and Dirs
@@ -86,6 +95,7 @@ endif()
 
 target_link_libraries(matching_engine
     pthread
+    ${AZURE_LIBS}
     ${CMAKE_THREAD_LIBS_INIT})
 
 

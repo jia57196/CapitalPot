@@ -1,0 +1,89 @@
+syntax="proto3";
+
+package matching.engine.messages;
+
+option optimize_for = CODE_SIZE;
+
+message Response {
+    int64 uid = 1;
+    string bussinesId = 2;
+    string recordId = 3;
+}
+
+message CashOperation {
+     int64 uid = 1;
+     string clientId = 2;
+     int64 dateTime = 3;
+     string assetId = 4;
+     double amount = 5;
+     string bussinesId = 6;
+     bool sendToBitcoin = 7;
+}
+
+message LimitOrder {
+    int64 uid = 1;
+    int64 timestamp = 2;
+    string clientId = 3;
+    string assetPairId = 4;
+    double volume = 5;
+    double price = 6;
+    bool cancelAllPreviousLimitOrders = 7;
+}
+
+message MarketOrder {
+    int64 uid = 1;
+    int64 timestamp = 2;
+    string clientId = 3;
+    string assetPairId = 4;
+    double volume = 5;
+    bool straight = 6;
+}
+
+message LimitOrderCancel {
+    int64 uid = 1;
+    int64 limitOrderId = 2;
+}
+
+message BalanceUpdate {
+    int64 uid = 1;
+    string clientId = 2;
+    string assetId = 3;
+    double amount = 4;
+}
+
+message MultiLimitOrder {
+    int64 uid = 1;
+    int64 timestamp = 2;
+    string clientId = 3;
+    string assetPairId = 4;
+
+    message Order {
+        double volume = 1;
+        double price = 2;
+    }
+
+    repeated Order orders = 5;
+
+    bool cancelAllPreviousLimitOrders = 6;
+}
+
+message WalletCredentialsReload {
+    int64 uid = 1;
+    string clientId = 2;
+}
+
+message SubscribeToBalanceUpdate {
+}
+
+message BalanceNotification {
+    string clientId = 1;
+}
+
+message SubscribeToQuotesUpdate {
+}
+
+message QuotesUpdate {
+    string assetId = 1;
+    double price = 2;
+    double volume = 3;
+}
