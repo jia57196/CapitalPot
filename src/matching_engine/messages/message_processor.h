@@ -2,7 +2,7 @@
 #pragma once 
 
 #include "../threads/BaseThread.h"
-
+#include <muduo/base/BlockingQueue.h>
 
 class MessageWrapper{
 
@@ -27,3 +27,5 @@ public:
 private:
 	void processMessage(MessageWrapper & message);
 };
+
+typedef  BlockingQueue<MessageWrapper>  MessageWrapperQueue;

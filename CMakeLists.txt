@@ -8,6 +8,8 @@ project(${PROJECT_NAME_STR} C CXX)
 # ----------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
 
+message(STATUS "CMAKE_FILES_DIRECTORY =${CMAKE_FILES_DIRECTORY}")
+
 # ----------------------------------------------------------------------------
 #   Basic Configuration
 # ----------------------------------------------------------------------------
@@ -54,9 +56,10 @@ set(MUDUO_DIR ${PROJECT_SOURCE_DIR}/cots/muduo)
 set(JSONCPP_DIR ${PROJECT_SOURCE_DIR}/cots/jsoncpp)
 set(AZURE_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/includes)
 set(AZURE_LIB_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/build.release/Binaries)
+SET(LDFLAGS "/usr/local/ssl/lib")
 
 add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
-add_subdirectory(${COTS_PROJECTS_DIR}/azure)
+#add_subdirectory(${COTS_PROJECTS_DIR}/azure)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/matching_engine)
 enable_testing()
 
@@ -73,13 +76,10 @@ find_library(AZURE_LIBS
              NAMES azurestorage
              HINTS "${AZURE_LIB_DIR}")
 
-#------------------------------------------------------
-# Boost Lib Names and Dirs
-#------------------------------------------------------
-set(Boost_USE_STATIC_LIBS OFF) 
-set(Boost_USE_MULTITHREADED ON)  
-set(Boost_USE_STATIC_RUNTIME OFF) 
-find_package(Boost 1.55.0 COMPONENTS filesystem system program_options regex) 
+find_library(CAS_LIBS
+             NAMES cpprest
+             HINTS "user/lib")
+
 
 file(GLOB MATCH_ENGINE_FILES        ${PROJECT_SOURCE_DIR}/src/matching_engine/*.cpp)
 file(GLOB TEST_SRC_FILES            ${PROJECT_SOURCE_DIR}/test/*.cpp)
@@ -88,14 +88,50 @@ add_executable(matching_engine ${MATCH_ENGINE_FILES})
 
 message(STATUS "Google Test libs is located @${GTEST_LIBS_DIR}")
 
-if(Boost_FOUND)
-    include_directories(${Boost_INCLUDE_DIRS}) 
-    target_link_libraries(matching_engine ${Boost_LIBRARIES})
+# Search OpenSSL
+find_package(PkgConfig REQUIRED)
+pkg_search_module(OPENSSL REQUIRED openssl)
+
+if( OPENSSL_FOUND )
+    include_directories(${OPENSSL_INCLUDE_DIRS})
+    message(STATUS "Using OpenSSL ${OPENSSL_VERSION}")
+else()
+    # Error; with REQUIRED, pkg_search_module() will throw an error by it's own
 endif()
+
+
+#------------------------------------------------------
+# Boost Lib Names and Dirs
+#------------------------------------------------------
+set(Boost_USE_STATIC_LIBS ON) 
+set(Boost_USE_MULTITHREADED ON)  
+set(Boost_USE_STATIC_RUNTIME ON) 
+find_package(Boost 1.58.0 REQUIRED COMPONENTS filesystem system program_options regex) 
+
+if (Boost_FOUND)
+  # From the offical documentation:
+  # Add include directories to the build. [...] If the SYSTEM option is given,
+  # the compiler will be told the directories are meant as system include
+  # directories on some platforms (signalling this setting might achieve effects
+  # such as the compiler skipping warnings [...])."
+  include_directories (SYSTEM ${Boost_INCLUDE_DIR})
+
+  # From the offical documentation:
+  # "Specify directories in which the linker will look for libraries. [...] Note
+  # that this command is rarely necessary. Library locations returned by
+  # find_package() and find_library() are absolute paths. Pass these absolute
+  # library file paths directly to the target_link_libraries() command. CMake
+  # will ensure the linker finds them."
+  #link_directories (${Boost_LIBRARY_DIRS})
+  message(STATUS "Boost libs are lcoated !")
+  include_directories(${Boost_INCLUDE_DIRS}) 
+  target_link_libraries(matching_engine ${Boost_LIBRARIES})
+endif ()
 
 target_link_libraries(matching_engine
     pthread
     ${AZURE_LIBS}
+    ${OPENSSL_LIBRARIES}
+    ${CAS_LIBS} 
     ${CMAKE_THREAD_LIBS_INIT})
-
 

@@ -7,7 +7,6 @@ ExternalProject_Add(azure-storage-cpp
     CMAKE_ARGS -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=DebugLibs
                -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=ReleaseLibs
                -DCMAKE_CXX_FLAGS=${MSVC_COMPILER_DEFS}
-               -Dgtest_force_shared_crt=ON
                -DCMAKE_BUILD_TYPE=Release
                -DCASABLANCA_DIR=/tmp/casablanca
      PREFIX "${CMAKE_CURRENT_BINARY_DIR}"
