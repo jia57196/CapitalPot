@@ -50,7 +50,7 @@ private:
 
 class KeyValue: public LoggableObject{
 public:
-	KeyValue(const std::string & key, const std::string & defineue_)
+	KeyValue(const std::string & key, const std::string & value)
 	: key_(key), value_(value){
 		root_[key_] = value_;
 	}

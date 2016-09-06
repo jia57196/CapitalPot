@@ -22,6 +22,7 @@ public:
 public:
 	void run();
 
+	Line getMetricLine(const std::string & ip, const std::string & status, const std::string & note);
 private:
 	void initMetricLogger();
 
@@ -32,6 +33,7 @@ private:
 	void connect(ClientHandler_PTR handler, const std::string & note);
 
 	std::list<std::string> getWhiteList();
+
 	/* data */
 private:
 	uint DEFAULT_PORT = 8888;
