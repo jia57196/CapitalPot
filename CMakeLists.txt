@@ -3,12 +3,19 @@ cmake_minimum_required(VERSION 3.2)
 set(PROJECT_NAME_STR penny_backend)
 project(${PROJECT_NAME_STR} C CXX)
 
+# Global settings
+set(GLOBAL_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
+set(CMAKE_INSTALL_PREFIX ${PROJECT_BINARY_DIR}/install)
+
+# Sets global output directory for single configuration (GCC)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${GLOBAL_OUTPUT_PATH})
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${GLOBAL_OUTPUT_PATH})
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${GLOBAL_OUTPUT_PATH})
+
 # ----------------------------------------------------------------------------
 #   make the build folder, and cd build $$ cmake everything...
 # ----------------------------------------------------------------------------
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}")
-
-message(STATUS "CMAKE_FILES_DIRECTORY =${CMAKE_FILES_DIRECTORY}")
 
 # ----------------------------------------------------------------------------
 #   Basic Configuration
@@ -54,14 +61,15 @@ set(TEST_INCLUDES ${PROJECT_SOURCE_DIR}/test)
 set(COTS_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/cots)
 set(MUDUO_DIR ${PROJECT_SOURCE_DIR}/cots/muduo)
 set(JSONCPP_DIR ${PROJECT_SOURCE_DIR}/cots/jsoncpp)
-set(AZURE_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/includes)
-set(AZURE_LIB_DIR ${PROJECT_SOURCE_DIR}/cots/azure-storage-cpp/Microsoft.WindowsAzure.Storage/build.release/Binaries)
 SET(LDFLAGS "/usr/local/ssl/lib")
 
-add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
-#add_subdirectory(${COTS_PROJECTS_DIR}/azure)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/matching_engine)
-enable_testing()
+add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
+add_subdirectory(${COTS_PROJECTS_DIR}/log)
+#add_subdirectory(${COTS_PROJECTS_DIR}/azure)
+
+include(${COTS_PROJECTS_DIR}/azure/CMakeLists.txt)
+
 
 #------------------------------------------------
 # TARGETS
@@ -72,9 +80,7 @@ LINK_LIBRARIES(${REQUIRED_LIBRARIES} )
 #------------------------------------------------
 # find libs 
 #------------------------------------------------
-find_library(AZURE_LIBS 
-             NAMES azurestorage
-             HINTS "${AZURE_LIB_DIR}")
+
 
 find_library(CAS_LIBS
              NAMES cpprest
@@ -98,6 +104,9 @@ if( OPENSSL_FOUND )
 else()
     # Error; with REQUIRED, pkg_search_module() will throw an error by it's own
 endif()
+
+# Global link directories
+link_directories(${GLOBAL_OUTPUT_PATH})
 
 
 #------------------------------------------------------
@@ -128,9 +137,21 @@ if (Boost_FOUND)
   target_link_libraries(matching_engine ${Boost_LIBRARIES})
 endif ()
 
+find_library(AZURE_LIBS 
+             NAMES azurestorage
+             PATHS "${GLOBAL_OUTPUT_PATH}" 
+             PATH_SUFFIXES "lib"
+             NO_DEFAULT_PATH)
+
+if (NOT AZURE_LIBS) 
+  message (STATUS "AZURE libs = ${AZURE_LIBS}")
+endif ()
+
+
+
 target_link_libraries(matching_engine
     pthread
-    ${AZURE_LIBS}
+    #${AZURE_LIBS}
     ${OPENSSL_LIBRARIES}
     ${CAS_LIBS} 
     ${CMAKE_THREAD_LIBS_INIT})
