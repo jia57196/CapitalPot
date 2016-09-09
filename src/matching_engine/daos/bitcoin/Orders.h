@@ -26,3 +26,9 @@ private:
 	ClientOrderPair      limitOrder_;
 	ClientTradePairQueue trades_;
 };
+
+struct ClientCashOperationPair{
+	std::string ClientId_;
+	std::string CashOperationId_;
+
+};

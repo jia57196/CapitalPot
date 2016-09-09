@@ -31,11 +31,20 @@ set(AZURE_INCLUDE_DIRS "${source_dir}/includes")
 ExternalProject_Get_Property(azure-storage-cpp binary_dir)
 set(AZURE_LIBS_DIR "${binary_dir}/Binaries")
 
-file(COPY ${AZURE_LIBS_DIR}/
-     DESTINATION ${GLOBAL_OUTPUT_PATH} )
 
-file(COPY ${AZURE_INCLUDE_DIRS}/
-     DESTINATION ${GLOBAL_OUTPUT_PATH}/azure-storage-cpp/include )
+add_custom_command(TARGET azure-storage-cpp
+                   COMMENT "copying the azure includes"
+                   POST_BUILD 
+                   COMMAND ${CMAKE_COMMAND} -E copy ${AZURE_LIBS_DIR} ${GLOBAL_OUTPUT_PATH}
+                   COMMAND ${CMAKE_COMMAND} -E copy ${AZURE_INCLUDE_DIRS} ${GLOBAL_OUTPUT_PATH}/azure-storage-cpp/
+                   
+)
+
+#file(COPY ${AZURE_LIBS_DIR}/
+#     DESTINATION ${GLOBAL_OUTPUT_PATH} )
+
+#file(COPY ${AZURE_INCLUDE_DIRS}/
+#     DESTINATION ${GLOBAL_OUTPUT_PATH}/azure-storage-cpp/include )
 
 
 
