@@ -30,5 +30,4 @@ private:
 struct ClientCashOperationPair{
 	std::string ClientId_;
 	std::string CashOperationId_;
-
 };

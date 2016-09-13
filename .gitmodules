@@ -4,6 +4,6 @@
 [submodule "cots/jsoncpp"]
 	path = cots/jsoncpp
 	url = https://github.com/open-source-parsers/jsoncpp.git
-[submodule "cots/azure-storage-cpp"]
-	path = cots/azure-storage-cpp
+[submodule "cots/azure/azure"]
+	path = cots/azure/azure
 	url = https://github.com/Azure/azure-storage-cpp.git

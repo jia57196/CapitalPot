@@ -1,9 +1,3 @@
-include(ExternalProject)
-
-set(CMAKE_CXX_FLAGS -std=c++11)
-
-message (STATUS "AZURE global output path dir = ${GLOBAL_OUTPUT_PATH}")
-message (STATUS "AZURE CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
 cmake_minimum_required(VERSION 3.2)
 set(EXTERNAL_PROJECTS "")
 set(EXTERNAL_LIBS "")
@@ -20,12 +14,12 @@ set(EXTERNAL_CMAKE_ARGS -D CMAKE_SYSROOT=${CMAKE_SYSROOT}
 )
 
 set(AZURE Microsoft.WindowsAzure.Storage)
-set(AZURE_SRC azure-storage-cpp)
+set(AZURE_SRC azure-storage-cpp-src)
 set(EXTERNAL_PROJECTS ${EXTERNAL_PROJECTS} ${AZURE_SRC} ${AZURE})
 set(AZURE_SRC_GIT_BRANCH "master")
 
 set(COTS_PATH ${COTS_PROJECTS_DIR})
-message (status "COTS_PATH=${COTS_PATH}")
+message (status "CMAKE_SOURCE_DIR=${CMAKE_SOURCE_DIR}")
 message (status "CMAKE_BINARY_DIR=${CMAKE_BINARY_DIR}")
 
 ExternalProject_Add(${AZURE_SRC}
@@ -51,12 +45,13 @@ ExternalProject_Add(${AZURE}
         -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
         -DCASABLANCA_DIR=/tmp/casablanca
 
-    INSTALL_COMMAND rm -rf ${COTS_PATH}/${AZURE_SRC}/include && mkdir -p ${COTS_PATH}/${AZURE_SRC}/include &&
-        echo "ln -sf ${CMAKE_BINARY_DIR}/${AZURE_SRC}/src/${AZURE_SRC}/${AZURE}/includes ${COTS_PATH}/${AZURE_SRC}/include" && echo "ln -sr ${CMAKE_BINARY_DIR}/${AZURE}/src/${AZURE}-build/Binaries ${COTS_PATH}/${AZURE_SRC}" | bash
+    INSTALL_COMMAND rm -rf ${CMAKE_SOURCE_DIR}/${AZURE_SRC}/include && mkdir -p  ${COTS_PATH}/${AZURE_SRC}/include &&
+        echo "ln -sr ${CMAKE_BINARY_DIR}/${AZURE_SRC}/src/${AZURE_SRC}/${AZURE}/includes/*.* ${CMAKE_SOURCE_DIR}/${AZURE_SRC}/include" &&
+    echo "ln -sr ${CMAKE_BINARY_DIR}/${AZURE}/src/${AZURE}-build/Binaries ${COTS_PATH}/${AZURE_SRC}" | bash
 )
 
-set(AZURE_LIBRARY_PATH ${COTS_PATH}/${AZURE_SRC}/Binaries)
-set(AZURE_INCLUDE_PATH ${COTS_PATH}/${AZURE_SRC}/include)
+set(AZURE_LIBRARY_PATH ${CMAKE_SOURCE_DIR}/${AZURE_SRC}/Binaries)
+set(AZURE_INCLUDE_PATH ${CMAKE_SOURCE_DIR}/${AZURE_SRC}/include)
 
 
 set(LIBAZURE libazure)
@@ -70,11 +65,3 @@ add_library(${LIBAZURECPP} STATIC IMPORTED)
 set_property(TARGET ${LIBAZURECPP} PROPERTY IMPORTED_LOCATION ${AZURE_INCLUDE_PATH})
 add_dependencies(${LIBAZURECPP} ${AZURE})
 set(EXTERNAL_LIBS ${EXTERNAL_LIBS} ${LIBAZURECPP})
-
-
-set(AZURE_INCLUDE_DIRS, AZURE_INCLUDE_PATH)
-INCLUDE_DIRECTORIES(${AZURE_INCLUDE_DIRS})
-
-message (STATUS "AZURE AZURE_LIBS_DIR = ${AZURE_LIBRARY_PATH}")
-message (STATUS "AZURE AZURE_INCLUDE_DIRS = ${AZURE_INCLUDE_DIRS}")
-

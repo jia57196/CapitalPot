@@ -66,9 +66,10 @@ SET(LDFLAGS "/usr/local/ssl/lib")
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/matching_engine)
 add_subdirectory(${COTS_PROJECTS_DIR}/gtest)
 add_subdirectory(${COTS_PROJECTS_DIR}/log)
-#add_subdirectory(${COTS_PROJECTS_DIR}/azure)
 
+#add_subdirectory(${COTS_PROJECTS_DIR}/azure)
 include(${COTS_PROJECTS_DIR}/azure/CMakeLists.txt)
+#include(${COTS_PROJECTS_DIR}/aiousb/CMakeLists.txt)
 
 
 #------------------------------------------------
@@ -147,7 +148,8 @@ if (NOT AZURE_LIBS)
   message (STATUS "AZURE libs = ${AZURE_LIBS}")
 endif ()
 
-
+add_dependencies(matching_engine ${AZURE})
+#add_dependencies(matching_engine aiousb_src)
 
 target_link_libraries(matching_engine
     pthread
