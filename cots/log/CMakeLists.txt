@@ -8,6 +8,10 @@ include(ExternalProject)
 # HumbleLogging
 ###############################################################################
 
+message (STATUS "CMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR}")
+
+set(COTS_PATH ${COTS_PROJECTS_DIR})
+
 ExternalProject_Add(
   HumbleLogging
 
@@ -18,30 +22,28 @@ ExternalProject_Add(
   PATCH_COMMAND ""
   PREFIX "${CMAKE_CURRENT_BINARY_DIR}"
   
-  CMAKE_ARGS -DBuildShared=ON -DBuildExamples=OFF -DCMAKE_INSTALL_PREFIX=${GLOBAL_OUTPUT_PATH}/humblelogging
+  CMAKE_ARGS -DBuildShared=ON -DBuildExamples=OFF -DCMAKE_INSTALL_PREFIX=${CMAKE_CURRENT_BINARY_DIR}/humblelogging
   
   TEST_COMMAND ""
 )
-#SOURCE_DIR "${CMAKE_SOURCE_DIR}/cots/humblelogging"
 
-ExternalProject_Add_Step(
-  HumbleLogging CopyToBin
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${GLOBAL_OUTPUT_PATH}/humblelogging/bin ${GLOBAL_OUTPUT_PATH}
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${GLOBAL_OUTPUT_PATH}/humblelogging/lib ${GLOBAL_OUTPUT_PATH}
-  DEPENDEES install
-)
+ExternalProject_Get_Property(HumbleLogging source_dir)
+set(HumbleLogging_INCLUDE_DIRS ${source_dir}/include)
 
-set(HumbleLogging_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/3rdparty/humblelogging/include")
-set(HumbleLogging_LIBRARIES "${CMAKE_SHARED_LIBRARY_PREFIX}humblelogging${CMAKE_SHARED_LIBRARY_SUFFIX}")
+# Specify MainTest's link libraries
+ExternalProject_Get_Property(HumbleLogging binary_dir)
+set(HumbleLogging_LIBRARIES ${binary_dir})
+
 include_directories(${HumbleLogging_INCLUDE_DIRS})
-
+message (STATUS "HumbleLogging_INCLUDE_DIRS=${HumbleLogging_INCLUDE_DIRS}")
+message (STATUS "HumbleLogging_LIBRARIES=${binary_dir}")
 
 find_library(LOG_LIBS 
              NAMES humblelogging
-             PATHS "${GLOBAL_OUTPUT_PATH}" 
+             PATHS "${HumbleLogging_LIBRARIES}" 
              PATH_SUFFIXES "lib"
              NO_DEFAULT_PATH)
 
 if (NOT LOG_LIBS) 
-  message (STATUS "LOG_LIBS = ${LOG_LIBS} @ ${GLOBAL_OUTPUT_PATH}")
+  message (STATUS "LOG_LIBS = ${LOG_LIBS} @ ${HumbleLogging_LIBRARIES}")
 endif ()

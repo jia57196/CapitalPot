@@ -72,17 +72,18 @@ include(${COTS_PROJECTS_DIR}/azure/CMakeLists.txt)
 #include(${COTS_PROJECTS_DIR}/aiousb/CMakeLists.txt)
 
 
+message(STATUS "AZURE_INCLUDE_DIRS=${AZURE_INCLUDE_DIRS}")
+
 #------------------------------------------------
 # TARGETS
 #------------------------------------------------
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR} ${JSONCPP_DIR} ${AZURE_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR} ${COMMON_INCLUDES} ${MUDUO_DIR} ${JSONCPP_DIR} ${AZURE_INCLUDE_PATH} )
 LINK_LIBRARIES(${REQUIRED_LIBRARIES} )
+
 
 #------------------------------------------------
 # find libs 
 #------------------------------------------------
-
-
 find_library(CAS_LIBS
              NAMES cpprest
              HINTS "user/lib")
@@ -92,8 +93,8 @@ file(GLOB MATCH_ENGINE_FILES        ${PROJECT_SOURCE_DIR}/src/matching_engine/*.
 file(GLOB TEST_SRC_FILES            ${PROJECT_SOURCE_DIR}/test/*.cpp)
 
 add_executable(matching_engine ${MATCH_ENGINE_FILES}) 
+add_dependencies(matching_engine ${AZURE})
 
-message(STATUS "Google Test libs is located @${GTEST_LIBS_DIR}")
 
 # Search OpenSSL
 find_package(PkgConfig REQUIRED)
@@ -147,9 +148,6 @@ find_library(AZURE_LIBS
 if (NOT AZURE_LIBS) 
   message (STATUS "AZURE libs = ${AZURE_LIBS}")
 endif ()
-
-add_dependencies(matching_engine ${AZURE})
-#add_dependencies(matching_engine aiousb_src)
 
 target_link_libraries(matching_engine
     pthread

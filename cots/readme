@@ -1,0 +1,25 @@
+
+For muduo example compiling:
+1. rememeber to add 
+  cmake_minimum_required(VERSION 3.5)
+  in the CMakeLists.txt in <example> folder
+2. if still have the link problem with protobuf, please use ${PROTOBUF_LIBRARY} in target link. e.g.
+   target_link_libraries(ace_logging_server muduo_protobuf_codec ace_logging_proto ${PROTOBUF_LIBRARY})
+
+3. make 
+   into the example folder.
+
+4. if running into compiling error of "fatal error: ares.h: No such file or directory"
+   
+   please install "libc-ares-dev"
+
+5. link error with protobuf, please 
+   There is an old default OS version of protobuf in /usr/lib/x86_64-linux-gnu. Just delete libprotobuf.*, libprotobuf-lite.*, libprotoc.* and install again new version of protobuf.
+
+undefined reference to `google::protobuf::io::CodedOutputStream::WriteVarint64ToArray(unsigned long long, unsigned char*)'
+.build_release/lib/libcaffe.so: undefined reference to `google::protobuf::internal::WireFormatLite::WriteInt64(int, long long, google::protobuf::io::CodedOutputStream*)'
+.build_release/lib/libcaffe.so: undefined reference to `google::protobuf::UnknownFieldSet::AddVarint(int, unsigned long long)'
+.build_release/lib/libcaffe.so: undefined reference to `google::protobuf::io::CodedOutputStream::VarintSize64(unsigned long long)'
+.build_release/lib/libcaffe.so: undefined reference to `google::protobuf::io::CodedOutputStream::WriteVarint64(unsigned long long)'
+
+

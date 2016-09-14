@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-sudo apt-get install autoconf automake libtool curl make g++ unzip
+sudo apt-get -y install autoconf automake libtool curl make g++ unzip libgd2-noxpm-dev libc-ares-dev
 
 CUURENT_FOLDER=$(pwd)
 
@@ -11,7 +11,7 @@ git clone https://github.com/google/protobuf.git
 cd protobuf
 ./autogen.sh
 ./configure --prefix=/usr
-make
+make all
 make check
 sudo make install
 
